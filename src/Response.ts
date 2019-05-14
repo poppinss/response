@@ -14,6 +14,7 @@
 /// <reference path="./contracts.ts" />
 
 import { ServerResponse, IncomingMessage } from 'http'
+import { DeepReadonly } from 'ts-essentials'
 import { parse } from 'url'
 import * as etag from 'etag'
 import * as onFinished from 'on-finished'
@@ -95,7 +96,7 @@ export class Response extends Macroable implements ResponseContract {
   constructor (
     public request: IncomingMessage,
     public response: ServerResponse,
-    private _config: ResponseConfigContract,
+    private _config: DeepReadonly<ResponseConfigContract>,
   ) {
     super()
   }
@@ -779,11 +780,7 @@ export class Response extends Macroable implements ResponseContract {
    * all options from the config (means they are not merged).
    */
   public cookie (key: string, value: any, options?: Partial<CookieOptions>): this {
-    if (options) {
-      options = Object.assign({}, this._config.cookie, options)
-    } else {
-      options = this._config.cookie
-    }
+    options = Object.assign({}, this._config.cookie, options)
 
     const serialized = serialize(key, value, this._config.secret, options)
     if (!serialized) {
@@ -799,11 +796,7 @@ export class Response extends Macroable implements ResponseContract {
    * all options from the config (means they are not merged)
    */
   public plainCookie (key: string, value: any, options?: Partial<CookieOptions>): this {
-    if (options) {
-      options = Object.assign({}, this._config.cookie, options)
-    } else {
-      options = this._config.cookie
-    }
+    options = Object.assign({}, this._config.cookie, options)
 
     const serialized = serialize(key, value, undefined, options)
     if (!serialized) {
@@ -818,12 +811,7 @@ export class Response extends Macroable implements ResponseContract {
    * Clear existing cookie.
    */
   public clearCookie (key: string, options?: Partial<CookieOptions>): this {
-    if (options) {
-      options = Object.assign({}, this._config.cookie, options)
-    } else {
-      options = this._config.cookie
-    }
-
+    options = Object.assign({}, this._config.cookie, options)
     options.expires = new Date(1)
 
     const serialized = serialize(key, '', undefined, options)

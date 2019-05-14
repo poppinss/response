@@ -32,7 +32,7 @@
     "husky": "^2.2.0",
     "japa": "^2.0.10",
     "mrm": "^1.2.1",
-    "pkg-ok": "^2.3.1",
+    "np": "^5.0.1",
     "supertest": "^4.0.2",
     "ts-node": "^8.1.0",
     "tslint": "^5.16.0",
@@ -70,5 +70,9 @@
     "macroable": "^2.0.2",
     "on-finished": "^2.3.0",
     "vary": "^1.1.2"
+  },
+  "np": {
+    "contents": ".",
+    "anyBranch": false
   }
 }

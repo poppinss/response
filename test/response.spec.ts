@@ -16,7 +16,7 @@ import { Filesystem } from '@adonisjs/dev-utils'
 import { createWriteStream, createReadStream } from 'fs'
 import { createServer } from 'http'
 import * as etag from 'etag'
-import { parse } from '@adonisjs/cookie'
+import { parse } from '@poppinss/cookie'
 
 import { ResponseConfigContract } from '@poppinss/response/contracts'
 import { Response } from '../src/Response'

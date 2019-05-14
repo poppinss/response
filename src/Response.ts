@@ -25,7 +25,7 @@ import * as contentDisposition from 'content-disposition'
 import * as vary from 'vary'
 import * as fresh from 'fresh'
 import { Macroable } from 'macroable'
-import { serialize, CookieOptions } from '@adonisjs/cookie'
+import { serialize, CookieOptions } from '@poppinss/cookie'
 
 import {
   ResponseContract,

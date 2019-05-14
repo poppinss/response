@@ -10,7 +10,7 @@
 declare module '@poppinss/response/contracts' {
   import { MacroableConstructorContract } from 'macroable'
   import { ServerResponse, IncomingMessage } from 'http'
-  import { CookieOptions } from '@adonisjs/cookie'
+  import { CookieOptions } from '@poppinss/cookie'
 
   /**
    * Types from which response header can be casted to a

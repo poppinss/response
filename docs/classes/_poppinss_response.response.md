@@ -40,9 +40,6 @@ This is how `explicitEnd` mode works in nutshell.
 
 ### Properties
 
-* [_config](_poppinss_response.response.md#_config)
-* [_explicitStatus](_poppinss_response.response.md#_explicitstatus)
-* [_headers](_poppinss_response.response.md#_headers)
 * [explicitEnd](_poppinss_response.response.md#explicitend)
 * [lazyBody](_poppinss_response.response.md#lazybody)
 * [request](_poppinss_response.response.md#request)
@@ -59,9 +56,6 @@ This is how `explicitEnd` mode works in nutshell.
 
 ### Methods
 
-* [_castHeaderValue](_poppinss_response.response.md#_castheadervalue)
-* [_end](_poppinss_response.response.md#_end)
-* [_writeBody](_poppinss_response.response.md#_writebody)
 * [append](_poppinss_response.response.md#append)
 * [attachment](_poppinss_response.response.md#attachment)
 * [buildResponseBody](_poppinss_response.response.md#buildresponsebody)
@@ -119,27 +113,6 @@ ___
 
 ## Properties
 
-<a id="_config"></a>
-
-### `<Private>` _config
-
-**● _config**: *`ResponseConfigContract`*
-
-___
-<a id="_explicitstatus"></a>
-
-### `<Private>` _explicitStatus
-
-**● _explicitStatus**: *`boolean`* = false
-
-___
-<a id="_headers"></a>
-
-### `<Private>` _headers
-
-**● _headers**: *`any`*
-
-___
 <a id="explicitend"></a>
 
 ###  explicitEnd
@@ -240,62 +213,6 @@ ___
 
 ## Methods
 
-<a id="_castheadervalue"></a>
-
-### `<Private>` _castHeaderValue
-
-▸ **_castHeaderValue**(value: *`any`*): `string` \| `string`[]
-
-Normalizes header value to a string or an array of string
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| value | `any` |
-
-**Returns:** `string` \| `string`[]
-
-___
-<a id="_end"></a>
-
-### `<Private>` _end
-
-▸ **_end**(body?: *`any`*, statusCode?: *`undefined` \| `number`*): `void`
-
-Ends the response by flushing headers and writing body
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| `Optional` body | `any` |
-| `Optional` statusCode | `undefined` \| `number` |
-
-**Returns:** `void`
-
-___
-<a id="_writebody"></a>
-
-### `<Private>` _writeBody
-
-▸ **_writeBody**(content: *`any`*, generateEtag: *`boolean`*, jsonpCallbackName?: *`undefined` \| `string`*): `void`
-
-Writes the body with appropriate response headers. Etag header is set when `generateEtag` is set to `true`.
-
-Empty body results in `204`.
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| content | `any` |
-| generateEtag | `boolean` |
-| `Optional` jsonpCallbackName | `undefined` \| `string` |
-
-**Returns:** `void`
-
-___
 <a id="append"></a>
 
 ###  append

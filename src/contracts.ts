@@ -48,8 +48,8 @@ declare module '@poppinss/response/contracts' {
   type ResponseConfigContract = {
     etag: boolean,
     jsonpCallbackName: string,
-    secret: string,
     cookie: Partial<CookieOptions>,
+    secret?: string,
   }
 
   /**

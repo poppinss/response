@@ -2,7 +2,13 @@
   "name": "@poppinss/response",
   "version": "1.0.1",
   "description": "Wrapper over Node.js res, making it easier to send HTTP responses",
-  "main": "index.js",
+  "main": "build/index.js",
+  "files": [
+    "adonis-typings.d.ts",
+    "build/src",
+    "build/index.js",
+    "build/index.d.ts"
+  ],
   "scripts": {
     "mrm": "mrm --preset=@adonisjs/mrm-preset",
     "pretest": "npm run lint",

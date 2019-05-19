@@ -40,7 +40,7 @@ import {
 /**
  * Wraps `fs.stat` to promise interface.
  */
-function statFn (filePath): Promise<Stats> {
+function statFn (filePath: string): Promise<Stats> {
   return new Promise((resolve, reject) => {
     stat(filePath, (error, stats) => {
       if (error) {

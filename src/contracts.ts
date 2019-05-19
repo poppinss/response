@@ -8,9 +8,8 @@
 */
 
 declare module '@poppinss/response/contracts' {
-  import { MacroableConstructorContract } from 'macroable'
-  import { ServerResponse, IncomingMessage } from 'http'
   import { CookieOptions } from '@poppinss/cookie'
+  import { ServerResponse, IncomingMessage } from 'http'
 
   /**
    * Types from which response header can be casted to a
@@ -100,17 +99,5 @@ declare module '@poppinss/response/contracts' {
     clearCookie (key: string): this
 
     finish (): void
-  }
-
-  /**
-   * Constructor contract is required coz of static methods
-   * on the response class
-   */
-  interface ResponseConstructorContract extends MacroableConstructorContract {
-    new (
-      request: IncomingMessage,
-      response: ServerResponse,
-      config: Partial<ResponseConfigContract>,
-    ): ResponseContract
   }
 }

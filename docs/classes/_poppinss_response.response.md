@@ -97,7 +97,7 @@ This is how `explicitEnd` mode works in nutshell.
 
 ###  constructor
 
-⊕ **new Response**(request: *`IncomingMessage`*, response: *`ServerResponse`*, _config: *`ResponseConfigContract`*): [Response](_poppinss_response.response.md)
+⊕ **new Response**(request: *`IncomingMessage`*, response: *`ServerResponse`*, _config: *`DeepReadonly`<`ResponseConfigContract`>*): [Response](_poppinss_response.response.md)
 
 **Parameters:**
 
@@ -105,7 +105,7 @@ This is how `explicitEnd` mode works in nutshell.
 | ------ | ------ |
 | request | `IncomingMessage` |
 | response | `ServerResponse` |
-| _config | `ResponseConfigContract` |
+| _config | `DeepReadonly`<`ResponseConfigContract`> |
 
 **Returns:** [Response](_poppinss_response.response.md)
 

@@ -81,5 +81,17 @@
   "np": {
     "contents": ".",
     "anyBranch": false
-  }
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poppinss/response.git"
+  },
+  "bugs": {
+    "url": "https://github.com/poppinss/response/issues"
+  },
+  "homepage": "https://github.com/poppinss/response#readme"
 }

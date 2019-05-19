@@ -10,8 +10,8 @@
 declare module '@ioc:Adonis/Src/Response' {
   /// <reference path="./src/contracts.ts" />
   import { ResponseConstructorContract, ResponseContract as BaseContract } from '@poppinss/response/contracts'
-  interface ResponseContract extends BaseContract {}
 
+  export interface ResponseContract extends BaseContract {}
   const Response: ResponseConstructorContract
   export default Response
 }

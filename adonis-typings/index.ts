@@ -7,7 +7,7 @@
 * file that was distributed with this source code.
 */
 
-/// <reference path="./src/contracts.ts" />
+/// <reference path="../src/contracts.ts" />
 
 declare module '@ioc:Adonis/Src/Response' {
   import { ServerResponse, IncomingMessage } from 'http'
@@ -18,13 +18,7 @@ declare module '@ioc:Adonis/Src/Response' {
   } from '@poppinss/response/contracts'
 
   export interface ResponseContract extends BaseContract {}
-  export interface ResponseConstructorContract extends MacroableConstructorContract {
-    new (
-      request: IncomingMessage,
-      response: ServerResponse,
-      config: ResponseConfigContract,
-    ): ResponseContract
-  }
+  export interface ResponseConstructorContract extends MacroableConstructorContract {}
 
   /**
    * The IoC container must export the Response class and not it's instance.

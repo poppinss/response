@@ -14,11 +14,14 @@ declare module '@ioc:Adonis/Src/Response' {
   import { MacroableConstructorContract } from 'macroable'
   import {
     ResponseContract as BaseContract,
-    ResponseConfigContract,
+    ResponseConfigContract as BaseConfig,
   } from '@poppinss/response/contracts'
 
   export interface ResponseContract extends BaseContract {}
   export interface ResponseConstructorContract extends MacroableConstructorContract {}
+
+  type ResponseConfigContract = Pick<BaseConfig, Exclude<keyof BaseConfig, 'secret'>>
+  export { ResponseConfigContract }
 
   /**
    * The IoC container must export the Response class and not it's instance.

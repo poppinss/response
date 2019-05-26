@@ -7,8 +7,6 @@
 * file that was distributed with this source code.
 */
 
-/// <reference path="../src/contracts.ts" />
-
 import * as test from 'japa'
 import * as supertest from 'supertest'
 import { join } from 'path'
@@ -18,7 +16,7 @@ import { createServer } from 'http'
 import * as etag from 'etag'
 import { parse } from '@poppinss/cookie'
 
-import { ResponseConfigContract } from '@poppinss/response/contracts'
+import { ResponseConfigContract } from '../src/contracts'
 import { Response } from '../src/Response'
 
 const SECRET = Math.random().toFixed(36).substring(2, 38)

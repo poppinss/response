@@ -4,7 +4,6 @@
   "description": "Wrapper over Node.js res, making it easier to send HTTP responses",
   "main": "build/index.js",
   "files": [
-    "build/adonis-typings/index.d.ts",
     "build/src",
     "build/index.js",
     "build/index.d.ts"

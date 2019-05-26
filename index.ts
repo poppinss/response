@@ -7,7 +7,5 @@
 * file that was distributed with this source code.
 */
 
-/// <reference path="./src/contracts.ts" />
-
-export { ResponseContract, ResponseConfigContract } from '@poppinss/response/contracts'
+export { ResponseContract, ResponseConfigContract } from './src/contracts'
 export { Response } from './src/Response'

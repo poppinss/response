@@ -11,8 +11,6 @@
 * file that was distributed with this source code.
 */
 
-/// <reference path="./contracts.ts" />
-
 import { ServerResponse, IncomingMessage } from 'http'
 import { DeepReadonly } from 'ts-essentials'
 import { parse } from 'url'
@@ -35,7 +33,7 @@ import {
   ResponseContentType,
   ResponseStream,
   ResponseConfigContract,
-} from '@poppinss/response/contracts'
+} from './contracts'
 
 /**
  * Wraps `fs.stat` to promise interface.

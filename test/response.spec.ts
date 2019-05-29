@@ -10,7 +10,7 @@
 import * as test from 'japa'
 import * as supertest from 'supertest'
 import { join } from 'path'
-import { Filesystem } from '@adonisjs/dev-utils'
+import { Filesystem } from '@poppinss/dev-utils'
 import { createWriteStream, createReadStream } from 'fs'
 import { createServer } from 'http'
 import * as etag from 'etag'

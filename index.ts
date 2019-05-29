@@ -1,3 +1,7 @@
+/**
+* @module @poppinss/response
+*/
+
 /*
 * @poppinss/response
 *

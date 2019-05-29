@@ -30,7 +30,7 @@ This is how `explicitEnd` mode works in nutshell.
 
 ## Implements
 
-* `ResponseContract`
+* [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)
 
 ## Index
 
@@ -97,7 +97,7 @@ This is how `explicitEnd` mode works in nutshell.
 
 ###  constructor
 
-⊕ **new Response**(request: *`IncomingMessage`*, response: *`ServerResponse`*, _config: *`DeepReadonly`<`ResponseConfigContract`>*): [Response](_poppinss_response.response.md)
+⊕ **new Response**(request: *`IncomingMessage`*, response: *`ServerResponse`*, _config: *`DeepReadonly`<[ResponseConfigContract](../modules/_poppinss_response.md#responseconfigcontract)>*): [Response](_poppinss_response.response.md)
 
 **Parameters:**
 
@@ -105,7 +105,7 @@ This is how `explicitEnd` mode works in nutshell.
 | ------ | ------ |
 | request | `IncomingMessage` |
 | response | `ServerResponse` |
-| _config | `DeepReadonly`<`ResponseConfigContract`> |
+| _config | `DeepReadonly`<[ResponseConfigContract](../modules/_poppinss_response.md#responseconfigcontract)> |
 
 **Returns:** [Response](_poppinss_response.response.md)
 
@@ -124,7 +124,7 @@ ___
 
 ###  lazyBody
 
-**● lazyBody**: *`LazyBody` \| `null`* =  null
+**● lazyBody**: *[LazyBody](../modules/_poppinss_response.md#lazybody) \| `null`* =  null
 
 Lazy body is used to set the response body. However, do not write it on the socket immediately unless `response.finish` is called.
 
@@ -217,7 +217,7 @@ ___
 
 ###  append
 
-▸ **append**(key: *`string`*, value: *`CastableHeader`*): `this`
+▸ **append**(key: *`string`*, value: *[CastableHeader](../modules/_poppinss_response.md#castableheader)*): `this`
 
 Append value to an existing header. To replace the value, we suggest using [header](_poppinss_response.response.md#header) method.
 
@@ -233,7 +233,7 @@ response.append('set-cookie', 'username=virk')
 | Name | Type |
 | ------ | ------ |
 | key | `string` |
-| value | `CastableHeader` |
+| value | [CastableHeader](../modules/_poppinss_response.md#castableheader) |
 
 **Returns:** `this`
 
@@ -436,7 +436,7 @@ ___
 
 ###  header
 
-▸ **header**(key: *`string`*, value: *`CastableHeader`*): `this`
+▸ **header**(key: *`string`*, value: *[CastableHeader](../modules/_poppinss_response.md#castableheader)*): `this`
 
 Set header on the response. To `append` values to the existing header, we suggest using [append](_poppinss_response.response.md#append) method.
 
@@ -452,7 +452,7 @@ response.header('content-type', 'application/json')
 | Name | Type |
 | ------ | ------ |
 | key | `string` |
-| value | `CastableHeader` |
+| value | [CastableHeader](../modules/_poppinss_response.md#castableheader) |
 
 **Returns:** `this`
 
@@ -582,7 +582,7 @@ ___
 
 ###  safeHeader
 
-▸ **safeHeader**(key: *`string`*, value: *`CastableHeader`*): `this`
+▸ **safeHeader**(key: *`string`*, value: *[CastableHeader](../modules/_poppinss_response.md#castableheader)*): `this`
 
 Adds HTTP response header, when it doesn't exists already.
 
@@ -591,7 +591,7 @@ Adds HTTP response header, when it doesn't exists already.
 | Name | Type |
 | ------ | ------ |
 | key | `string` |
-| value | `CastableHeader` |
+| value | [CastableHeader](../modules/_poppinss_response.md#castableheader) |
 
 **Returns:** `this`
 
@@ -674,7 +674,7 @@ ___
 
 ###  stream
 
-▸ **stream**(body: *`ResponseStream`*, raiseErrors?: *`boolean`*): `Promise`<`Error` \| `void`>
+▸ **stream**(body: *[ResponseStream](../modules/_poppinss_response.md#responsestream)*, raiseErrors?: *`boolean`*): `Promise`<`Error` \| `void`>
 
 Pipe stream to the response. This method will gracefully destroy the stream, avoiding memory leaks.
 
@@ -699,7 +699,7 @@ try {
 
 | Name | Type | Default value |
 | ------ | ------ | ------ |
-| body | `ResponseStream` | - |
+| body | [ResponseStream](../modules/_poppinss_response.md#responsestream) | - |
 | `Default value` raiseErrors | `boolean` | false |
 
 **Returns:** `Promise`<`Error` \| `void`>

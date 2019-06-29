@@ -97,8 +97,8 @@ export interface ResponseContract {
   location (url: string): this
   redirect (url: string, reflectQueryParams?: boolean, statusCode?: number): void
 
-  cookie (key: string, value: any, options?: CookieOptions): this
-  plainCookie (key: string, value: any, options?: CookieOptions): this
+  cookie (key: string, value: any, options?: Partial<CookieOptions>): this
+  plainCookie (key: string, value: any, options?: Partial<CookieOptions>): this
   clearCookie (key: string): this
 
   finish (): void

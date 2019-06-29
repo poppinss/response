@@ -1,4 +1,6 @@
-[@poppinss/response](../README.md) > [@poppinss/response](../modules/_poppinss_response.md) > [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)
+> **[@poppinss/response](../README.md)**
+
+[Globals](../README.md) / [@poppinss/response](../modules/_poppinss_response.md) / [ResponseContract](_poppinss_response.responsecontract.md) /
 
 # Interface: ResponseContract
 
@@ -6,15 +8,15 @@ Main response interface
 
 ## Hierarchy
 
-**ResponseContract**
+* **ResponseContract**
 
 ## Implemented by
 
 * [Response](../classes/_poppinss_response.response.md)
 
-## Index
+### Index
 
-### Properties
+#### Properties
 
 * [explicitEnd](_poppinss_response.responsecontract.md#explicitend)
 * [finished](_poppinss_response.responsecontract.md#finished)
@@ -25,7 +27,7 @@ Main response interface
 * [request](_poppinss_response.responsecontract.md#request)
 * [response](_poppinss_response.responsecontract.md#response)
 
-### Methods
+#### Methods
 
 * [append](_poppinss_response.responsecontract.md#append)
 * [attachment](_poppinss_response.responsecontract.md#attachment)
@@ -51,428 +53,388 @@ Main response interface
 * [type](_poppinss_response.responsecontract.md#type)
 * [vary](_poppinss_response.responsecontract.md#vary)
 
----
-
 ## Properties
-
-<a id="explicitend"></a>
 
 ###  explicitEnd
 
-**● explicitEnd**: *`boolean`*
+• **explicitEnd**: *boolean*
 
 ___
-<a id="finished"></a>
 
 ###  finished
 
-**● finished**: *`boolean`*
+• **finished**: *boolean*
 
 ___
-<a id="haslazybody"></a>
 
 ###  hasLazyBody
 
-**● hasLazyBody**: *`boolean`*
+• **hasLazyBody**: *boolean*
 
 ___
-<a id="headerssent"></a>
 
 ###  headersSent
 
-**● headersSent**: *`boolean`*
+• **headersSent**: *boolean*
 
 ___
-<a id="ispending"></a>
 
 ###  isPending
 
-**● isPending**: *`boolean`*
+• **isPending**: *boolean*
 
 ___
-<a id="lazybody"></a>
 
 ###  lazyBody
 
-**● lazyBody**: *[LazyBody](../modules/_poppinss_response.md#lazybody) \| `null`*
+• **lazyBody**: *[LazyBody](../modules/_poppinss_response.md#lazybody) | null*
 
 ___
-<a id="request"></a>
 
 ###  request
 
-**● request**: *`IncomingMessage`*
+• **request**: *`IncomingMessage`*
 
 ___
-<a id="response"></a>
 
 ###  response
 
-**● response**: *`ServerResponse`*
-
-___
+• **response**: *`ServerResponse`*
 
 ## Methods
 
-<a id="append"></a>
-
 ###  append
 
-▸ **append**(key: *`string`*, value: *[CastableHeader](../modules/_poppinss_response.md#castableheader)*): `this`
+▸ **append**(`key`: *string*, `value`: *[CastableHeader](../modules/_poppinss_response.md#castableheader)*): *this*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| key | `string` |
-| value | [CastableHeader](../modules/_poppinss_response.md#castableheader) |
+Name | Type |
+------ | ------ |
+`key` | string |
+`value` | [CastableHeader](../modules/_poppinss_response.md#castableheader) |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="attachment"></a>
 
 ###  attachment
 
-▸ **attachment**(filePath: *`string`*, name?: *`undefined` \| `string`*, disposition?: *`undefined` \| `string`*, generateEtag?: *`undefined` \| `false` \| `true`*, raiseErrors?: *`undefined` \| `false` \| `true`*): `Promise`<`Error` \| `void`>
+▸ **attachment**(`filePath`: *string*, `name?`: *undefined | string*, `disposition?`: *undefined | string*, `generateEtag?`: *undefined | false | true*, `raiseErrors?`: *undefined | false | true*): *`Promise<Error | void>`*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| filePath | `string` |
-| `Optional` name | `undefined` \| `string` |
-| `Optional` disposition | `undefined` \| `string` |
-| `Optional` generateEtag | `undefined` \| `false` \| `true` |
-| `Optional` raiseErrors | `undefined` \| `false` \| `true` |
+Name | Type |
+------ | ------ |
+`filePath` | string |
+`name?` | undefined \| string |
+`disposition?` | undefined \| string |
+`generateEtag?` | undefined \| false \| true |
+`raiseErrors?` | undefined \| false \| true |
 
-**Returns:** `Promise`<`Error` \| `void`>
+**Returns:** *`Promise<Error | void>`*
 
 ___
-<a id="buildresponsebody"></a>
 
 ###  buildResponseBody
 
-▸ **buildResponseBody**(body: *`any`*): `object`
+▸ **buildResponseBody**(`body`: *any*): *object*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| body | `any` |
+Name | Type |
+------ | ------ |
+`body` | any |
 
-**Returns:** `object`
+**Returns:** *object*
 
 ___
-<a id="clearcookie"></a>
 
 ###  clearCookie
 
-▸ **clearCookie**(key: *`string`*): `this`
+▸ **clearCookie**(`key`: *string*): *this*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| key | `string` |
+Name | Type |
+------ | ------ |
+`key` | string |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="cookie"></a>
 
 ###  cookie
 
-▸ **cookie**(key: *`string`*, value: *`any`*, options?: *`CookieOptions`*): `this`
+▸ **cookie**(`key`: *string*, `value`: *any*, `options?`: *`Partial<CookieOptions>`*): *this*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| key | `string` |
-| value | `any` |
-| `Optional` options | `CookieOptions` |
+Name | Type |
+------ | ------ |
+`key` | string |
+`value` | any |
+`options?` | `Partial<CookieOptions>` |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="download"></a>
 
 ###  download
 
-▸ **download**(filePath: *`string`*, generateEtag?: *`undefined` \| `false` \| `true`*, raiseErrors?: *`undefined` \| `false` \| `true`*): `Promise`<`Error` \| `void`>
+▸ **download**(`filePath`: *string*, `generateEtag?`: *undefined | false | true*, `raiseErrors?`: *undefined | false | true*): *`Promise<Error | void>`*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| filePath | `string` |
-| `Optional` generateEtag | `undefined` \| `false` \| `true` |
-| `Optional` raiseErrors | `undefined` \| `false` \| `true` |
+Name | Type |
+------ | ------ |
+`filePath` | string |
+`generateEtag?` | undefined \| false \| true |
+`raiseErrors?` | undefined \| false \| true |
 
-**Returns:** `Promise`<`Error` \| `void`>
+**Returns:** *`Promise<Error | void>`*
 
 ___
-<a id="finish"></a>
 
 ###  finish
 
-▸ **finish**(): `void`
+▸ **finish**(): *void*
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="getheader"></a>
 
 ###  getHeader
 
-▸ **getHeader**(key: *`string`*): `string` \| `string`[] \| `number` \| `undefined`
+▸ **getHeader**(`key`: *string*): *string | string[] | number | undefined*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| key | `string` |
+Name | Type |
+------ | ------ |
+`key` | string |
 
-**Returns:** `string` \| `string`[] \| `number` \| `undefined`
+**Returns:** *string | string[] | number | undefined*
 
 ___
-<a id="header"></a>
 
 ###  header
 
-▸ **header**(key: *`string`*, value: *[CastableHeader](../modules/_poppinss_response.md#castableheader)*): `this`
+▸ **header**(`key`: *string*, `value`: *[CastableHeader](../modules/_poppinss_response.md#castableheader)*): *this*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| key | `string` |
-| value | [CastableHeader](../modules/_poppinss_response.md#castableheader) |
+Name | Type |
+------ | ------ |
+`key` | string |
+`value` | [CastableHeader](../modules/_poppinss_response.md#castableheader) |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="json"></a>
 
 ###  json
 
-▸ **json**(body: *`any`*, generateEtag?: *`undefined` \| `false` \| `true`*): `void`
+▸ **json**(`body`: *any*, `generateEtag?`: *undefined | false | true*): *void*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| body | `any` |
-| `Optional` generateEtag | `undefined` \| `false` \| `true` |
+Name | Type |
+------ | ------ |
+`body` | any |
+`generateEtag?` | undefined \| false \| true |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="jsonp"></a>
 
 ###  jsonp
 
-▸ **jsonp**(body: *`any`*, callbackName?: *`undefined` \| `string`*, generateEtag?: *`undefined` \| `false` \| `true`*): `void`
+▸ **jsonp**(`body`: *any*, `callbackName?`: *undefined | string*, `generateEtag?`: *undefined | false | true*): *void*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| body | `any` |
-| `Optional` callbackName | `undefined` \| `string` |
-| `Optional` generateEtag | `undefined` \| `false` \| `true` |
+Name | Type |
+------ | ------ |
+`body` | any |
+`callbackName?` | undefined \| string |
+`generateEtag?` | undefined \| false \| true |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="location"></a>
 
 ###  location
 
-▸ **location**(url: *`string`*): `this`
+▸ **location**(`url`: *string*): *this*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| url | `string` |
+Name | Type |
+------ | ------ |
+`url` | string |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="plaincookie"></a>
 
 ###  plainCookie
 
-▸ **plainCookie**(key: *`string`*, value: *`any`*, options?: *`CookieOptions`*): `this`
+▸ **plainCookie**(`key`: *string*, `value`: *any*, `options?`: *`Partial<CookieOptions>`*): *this*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| key | `string` |
-| value | `any` |
-| `Optional` options | `CookieOptions` |
+Name | Type |
+------ | ------ |
+`key` | string |
+`value` | any |
+`options?` | `Partial<CookieOptions>` |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="redirect"></a>
 
 ###  redirect
 
-▸ **redirect**(url: *`string`*, reflectQueryParams?: *`undefined` \| `false` \| `true`*, statusCode?: *`undefined` \| `number`*): `void`
+▸ **redirect**(`url`: *string*, `reflectQueryParams?`: *undefined | false | true*, `statusCode?`: *undefined | number*): *void*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| url | `string` |
-| `Optional` reflectQueryParams | `undefined` \| `false` \| `true` |
-| `Optional` statusCode | `undefined` \| `number` |
+Name | Type |
+------ | ------ |
+`url` | string |
+`reflectQueryParams?` | undefined \| false \| true |
+`statusCode?` | undefined \| number |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="removeheader"></a>
 
 ###  removeHeader
 
-▸ **removeHeader**(key: *`string`*): `this`
+▸ **removeHeader**(`key`: *string*): *this*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| key | `string` |
+Name | Type |
+------ | ------ |
+`key` | string |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="safeheader"></a>
 
 ###  safeHeader
 
-▸ **safeHeader**(key: *`string`*, value: *[CastableHeader](../modules/_poppinss_response.md#castableheader)*): `this`
+▸ **safeHeader**(`key`: *string*, `value`: *[CastableHeader](../modules/_poppinss_response.md#castableheader)*): *this*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| key | `string` |
-| value | [CastableHeader](../modules/_poppinss_response.md#castableheader) |
+Name | Type |
+------ | ------ |
+`key` | string |
+`value` | [CastableHeader](../modules/_poppinss_response.md#castableheader) |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="safestatus"></a>
 
 ###  safeStatus
 
-▸ **safeStatus**(code: *`number`*): `this`
+▸ **safeStatus**(`code`: *number*): *this*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| code | `number` |
+Name | Type |
+------ | ------ |
+`code` | number |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="send"></a>
 
 ###  send
 
-▸ **send**(body: *`any`*, generateEtag?: *`undefined` \| `false` \| `true`*): `void`
+▸ **send**(`body`: *any*, `generateEtag?`: *undefined | false | true*): *void*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| body | `any` |
-| `Optional` generateEtag | `undefined` \| `false` \| `true` |
+Name | Type |
+------ | ------ |
+`body` | any |
+`generateEtag?` | undefined \| false \| true |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="setetag"></a>
 
 ###  setEtag
 
-▸ **setEtag**(body: *`any`*, weak?: *`undefined` \| `false` \| `true`*): `this`
+▸ **setEtag**(`body`: *any*, `weak?`: *undefined | false | true*): *this*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| body | `any` |
-| `Optional` weak | `undefined` \| `false` \| `true` |
+Name | Type |
+------ | ------ |
+`body` | any |
+`weak?` | undefined \| false \| true |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="status"></a>
 
 ###  status
 
-▸ **status**(code: *`number`*): `this`
+▸ **status**(`code`: *number*): *this*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| code | `number` |
+Name | Type |
+------ | ------ |
+`code` | number |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="stream"></a>
 
 ###  stream
 
-▸ **stream**(stream: *[ResponseStream](../modules/_poppinss_response.md#responsestream)*, raiseErrors?: *`undefined` \| `false` \| `true`*): `Promise`<`Error` \| `void`>
+▸ **stream**(`stream`: *[ResponseStream](../modules/_poppinss_response.md#responsestream)*, `raiseErrors?`: *undefined | false | true*): *`Promise<Error | void>`*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| stream | [ResponseStream](../modules/_poppinss_response.md#responsestream) |
-| `Optional` raiseErrors | `undefined` \| `false` \| `true` |
+Name | Type |
+------ | ------ |
+`stream` | [ResponseStream](../modules/_poppinss_response.md#responsestream) |
+`raiseErrors?` | undefined \| false \| true |
 
-**Returns:** `Promise`<`Error` \| `void`>
+**Returns:** *`Promise<Error | void>`*
 
 ___
-<a id="type"></a>
 
 ###  type
 
-▸ **type**(type: *`string`*, charset?: *`undefined` \| `string`*): `this`
+▸ **type**(`type`: *string*, `charset?`: *undefined | string*): *this*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| type | `string` |
-| `Optional` charset | `undefined` \| `string` |
+Name | Type |
+------ | ------ |
+`type` | string |
+`charset?` | undefined \| string |
 
-**Returns:** `this`
+**Returns:** *this*
 
 ___
-<a id="vary"></a>
 
 ###  vary
 
-▸ **vary**(field: *`string`*): `this`
+▸ **vary**(`field`: *string*): *this*
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| field | `string` |
+Name | Type |
+------ | ------ |
+`field` | string |
 
-**Returns:** `this`
-
-___
-
+**Returns:** *this*

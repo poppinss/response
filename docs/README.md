@@ -1,11 +1,9 @@
+> **[@poppinss/response](README.md)**
 
-#  @poppinss/response
+[Globals](README.md) /
 
-## Index
+### Index
 
-### External modules
+#### External modules
 
 * [@poppinss/response](modules/_poppinss_response.md)
-
----
-

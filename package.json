@@ -1,6 +1,6 @@
 {
   "name": "@poppinss/response",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Wrapper over Node.js res, making it easier to send HTTP responses",
   "main": "build/index.js",
   "files": [

@@ -1,26 +1,22 @@
 > **[@poppinss/response](../README.md)**
 
-[Globals](../README.md) / [@poppinss/response](_poppinss_response.md) /
+[Globals](../README.md) / ["contracts"](_contracts_.md) /
 
-# External module: @poppinss/response
+# External module: "contracts"
 
-### Index
+## Index
 
-#### Classes
+### Interfaces
 
-* [Response](../classes/_poppinss_response.response.md)
+* [ResponseContract](../interfaces/_contracts_.responsecontract.md)
 
-#### Interfaces
+### Type aliases
 
-* [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)
-
-#### Type aliases
-
-* [CastableHeader](_poppinss_response.md#castableheader)
-* [LazyBody](_poppinss_response.md#lazybody)
-* [ResponseConfigContract](_poppinss_response.md#responseconfigcontract)
-* [ResponseContentType](_poppinss_response.md#responsecontenttype)
-* [ResponseStream](_poppinss_response.md#responsestream)
+* [CastableHeader](_contracts_.md#castableheader)
+* [LazyBody](_contracts_.md#lazybody)
+* [ResponseConfigContract](_contracts_.md#responseconfigcontract)
+* [ResponseContentType](_contracts_.md#responsecontenttype)
+* [ResponseStream](_contracts_.md#responsestream)
 
 ## Type aliases
 

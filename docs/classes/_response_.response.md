@@ -1,6 +1,6 @@
 > **[@poppinss/response](../README.md)**
 
-[Globals](../README.md) / [@poppinss/response](../modules/_poppinss_response.md) / [Response](_poppinss_response.response.md) /
+[Globals](../README.md) / ["Response"](../modules/_response_.md) / [Response](_response_.response.md) /
 
 # Class: Response
 
@@ -34,70 +34,70 @@ This is how `explicitEnd` mode works in nutshell.
 
 ## Implements
 
-* [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)
+* [ResponseContract](../interfaces/_contracts_.responsecontract.md)
 
-### Index
+## Index
 
-#### Constructors
+### Constructors
 
-* [constructor](_poppinss_response.response.md#constructor)
+* [constructor](_response_.response.md#constructor)
 
-#### Properties
+### Properties
 
-* [explicitEnd](_poppinss_response.response.md#explicitend)
-* [lazyBody](_poppinss_response.response.md#lazybody)
-* [request](_poppinss_response.response.md#request)
-* [response](_poppinss_response.response.md#response)
-* [_getters](_poppinss_response.response.md#static-protected-_getters)
-* [_macros](_poppinss_response.response.md#static-protected-_macros)
+* [explicitEnd](_response_.response.md#explicitend)
+* [lazyBody](_response_.response.md#lazybody)
+* [request](_response_.response.md#request)
+* [response](_response_.response.md#response)
+* [_getters](_response_.response.md#static-protected-_getters)
+* [_macros](_response_.response.md#static-protected-_macros)
 
-#### Accessors
+### Accessors
 
-* [finished](_poppinss_response.response.md#finished)
-* [hasLazyBody](_poppinss_response.response.md#haslazybody)
-* [headersSent](_poppinss_response.response.md#headerssent)
-* [isPending](_poppinss_response.response.md#ispending)
+* [finished](_response_.response.md#finished)
+* [hasLazyBody](_response_.response.md#haslazybody)
+* [headersSent](_response_.response.md#headerssent)
+* [isPending](_response_.response.md#ispending)
 
-#### Methods
+### Methods
 
-* [append](_poppinss_response.response.md#append)
-* [attachment](_poppinss_response.response.md#attachment)
-* [buildResponseBody](_poppinss_response.response.md#buildresponsebody)
-* [clearCookie](_poppinss_response.response.md#clearcookie)
-* [cookie](_poppinss_response.response.md#cookie)
-* [download](_poppinss_response.response.md#download)
-* [finish](_poppinss_response.response.md#finish)
-* [flushHeaders](_poppinss_response.response.md#flushheaders)
-* [fresh](_poppinss_response.response.md#fresh)
-* [getHeader](_poppinss_response.response.md#getheader)
-* [header](_poppinss_response.response.md#header)
-* [json](_poppinss_response.response.md#json)
-* [jsonp](_poppinss_response.response.md#jsonp)
-* [location](_poppinss_response.response.md#location)
-* [plainCookie](_poppinss_response.response.md#plaincookie)
-* [redirect](_poppinss_response.response.md#redirect)
-* [removeHeader](_poppinss_response.response.md#removeheader)
-* [safeHeader](_poppinss_response.response.md#safeheader)
-* [safeStatus](_poppinss_response.response.md#safestatus)
-* [send](_poppinss_response.response.md#send)
-* [setEtag](_poppinss_response.response.md#setetag)
-* [status](_poppinss_response.response.md#status)
-* [stream](_poppinss_response.response.md#stream)
-* [type](_poppinss_response.response.md#type)
-* [vary](_poppinss_response.response.md#vary)
-* [getGetter](_poppinss_response.response.md#static-getgetter)
-* [getMacro](_poppinss_response.response.md#static-getmacro)
-* [getter](_poppinss_response.response.md#static-getter)
-* [hasGetter](_poppinss_response.response.md#static-hasgetter)
-* [hasMacro](_poppinss_response.response.md#static-hasmacro)
-* [hydrate](_poppinss_response.response.md#static-hydrate)
-* [macro](_poppinss_response.response.md#static-macro)
+* [append](_response_.response.md#append)
+* [attachment](_response_.response.md#attachment)
+* [buildResponseBody](_response_.response.md#buildresponsebody)
+* [clearCookie](_response_.response.md#clearcookie)
+* [cookie](_response_.response.md#cookie)
+* [download](_response_.response.md#download)
+* [finish](_response_.response.md#finish)
+* [flushHeaders](_response_.response.md#flushheaders)
+* [fresh](_response_.response.md#fresh)
+* [getHeader](_response_.response.md#getheader)
+* [header](_response_.response.md#header)
+* [json](_response_.response.md#json)
+* [jsonp](_response_.response.md#jsonp)
+* [location](_response_.response.md#location)
+* [plainCookie](_response_.response.md#plaincookie)
+* [redirect](_response_.response.md#redirect)
+* [removeHeader](_response_.response.md#removeheader)
+* [safeHeader](_response_.response.md#safeheader)
+* [safeStatus](_response_.response.md#safestatus)
+* [send](_response_.response.md#send)
+* [setEtag](_response_.response.md#setetag)
+* [status](_response_.response.md#status)
+* [stream](_response_.response.md#stream)
+* [type](_response_.response.md#type)
+* [vary](_response_.response.md#vary)
+* [getGetter](_response_.response.md#static-getgetter)
+* [getMacro](_response_.response.md#static-getmacro)
+* [getter](_response_.response.md#static-getter)
+* [hasGetter](_response_.response.md#static-hasgetter)
+* [hasMacro](_response_.response.md#static-hasmacro)
+* [hydrate](_response_.response.md#static-hydrate)
+* [macro](_response_.response.md#static-macro)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new Response**(`request`: *`IncomingMessage`*, `response`: *`ServerResponse`*, `_config`: *`DeepReadonly<ResponseConfigContract>`*): *[Response](_poppinss_response.response.md)*
+\+ **new Response**(`request`: `IncomingMessage`, `response`: `ServerResponse`, `_config`: `DeepReadonly<ResponseConfigContract>`): *[Response](_response_.response.md)*
 
 **Parameters:**
 
@@ -107,7 +107,7 @@ Name | Type |
 `response` | `ServerResponse` |
 `_config` | `DeepReadonly<ResponseConfigContract>` |
 
-**Returns:** *[Response](_poppinss_response.response.md)*
+**Returns:** *[Response](_response_.response.md)*
 
 ## Properties
 
@@ -115,15 +115,15 @@ Name | Type |
 
 • **explicitEnd**: *boolean* = false
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md).[explicitEnd](../interfaces/_poppinss_response.responsecontract.md#explicitend)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md).[explicitEnd](../interfaces/_contracts_.responsecontract.md#explicitend)*
 
 ___
 
 ###  lazyBody
 
-• **lazyBody**: *[LazyBody](../modules/_poppinss_response.md#lazybody) | null* =  null
+• **lazyBody**: *[LazyBody](../modules/_contracts_.md#lazybody) | null* =  null
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md).[lazyBody](../interfaces/_poppinss_response.responsecontract.md#lazybody)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md).[lazyBody](../interfaces/_contracts_.responsecontract.md#lazybody)*
 
 Lazy body is used to set the response body. However, do not
 write it on the socket immediately unless `response.finish`
@@ -137,7 +137,7 @@ ___
 
 • **request**: *`IncomingMessage`*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md).[request](../interfaces/_poppinss_response.responsecontract.md#request)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md).[request](../interfaces/_contracts_.responsecontract.md#request)*
 
 ___
 
@@ -145,7 +145,7 @@ ___
 
 • **response**: *`ServerResponse`*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md).[response](../interfaces/_poppinss_response.responsecontract.md#response)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md).[response](../interfaces/_contracts_.responsecontract.md#response)*
 
 ___
 
@@ -217,12 +217,12 @@ and body.
 
 ###  append
 
-▸ **append**(`key`: *string*, `value`: *[CastableHeader](../modules/_poppinss_response.md#castableheader)*): *this*
+▸ **append**(`key`: string, `value`: [CastableHeader](../modules/_contracts_.md#castableheader)): *this*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
 Append value to an existing header. To replace the value, we suggest using
-[header](_poppinss_response.response.md#header) method.
+[header](_response_.response.md#header) method.
 
 If `value` is not existy, then header won't be set.
 
@@ -236,7 +236,7 @@ response.append('set-cookie', 'username=virk')
 Name | Type |
 ------ | ------ |
 `key` | string |
-`value` | [CastableHeader](../modules/_poppinss_response.md#castableheader) |
+`value` | [CastableHeader](../modules/_contracts_.md#castableheader) |
 
 **Returns:** *this*
 
@@ -244,14 +244,14 @@ ___
 
 ###  attachment
 
-▸ **attachment**(`filePath`: *string*, `name?`: *undefined | string*, `disposition?`: *undefined | string*, `generateEtag?`: *undefined | false | true*, `raiseErrors?`: *undefined | false | true*): *`Promise<void | Error>`*
+▸ **attachment**(`filePath`: string, `name?`: undefined | string, `disposition?`: undefined | string, `generateEtag?`: undefined | false | true, `raiseErrors?`: undefined | false | true): *`Promise<void | Error>`*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
 Download the file by forcing the user to save the file vs displaying it
 within the browser.
 
-Internally calls [download](_poppinss_response.response.md#download)
+Internally calls [download](_response_.response.md#download)
 
 **Parameters:**
 
@@ -269,14 +269,14 @@ ___
 
 ###  buildResponseBody
 
-▸ **buildResponseBody**(`body`: *any*): *object*
+▸ **buildResponseBody**(`body`: any): *object*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
 Builds the response body and returns it's appropriate type
 to be set as the content-type header.
 
-Ideally, you should use [send](_poppinss_response.response.md#send) vs using this method. This method will
+Ideally, you should use [send](_response_.response.md#send) vs using this method. This method will
 not set any headers and must be used when you want more control over the
 response sending process.
 
@@ -295,7 +295,7 @@ ___
 
 ###  clearCookie
 
-▸ **clearCookie**(`key`: *string*, `options?`: *`Partial<CookieOptions>`*): *this*
+▸ **clearCookie**(`key`: string, `options?`: `Partial<CookieOptions>`): *this*
 
 Clear existing cookie.
 
@@ -312,9 +312,9 @@ ___
 
 ###  cookie
 
-▸ **cookie**(`key`: *string*, `value`: *any*, `options?`: *`Partial<CookieOptions>`*): *this*
+▸ **cookie**(`key`: string, `value`: any, `options?`: `Partial<CookieOptions>`): *this*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
 Set signed cookie as the response header. The inline options overrides
 all options from the config (means they are not merged).
@@ -333,7 +333,7 @@ ___
 
 ###  download
 
-▸ **download**(`filePath`: *string*, `generateEtag`: *boolean*, `raiseErrors`: *boolean*): *`Promise<void | Error>`*
+▸ **download**(`filePath`: string, `generateEtag`: boolean, `raiseErrors`: boolean): *`Promise<void | Error>`*
 
 Download file by streaming it from the file path. This method will setup
 appropriate `Content-type`, `Content-type` and `Last-modified` headers.
@@ -375,7 +375,7 @@ ___
 
 ▸ **finish**(): *void*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
 Finishes the response by writing the lazy body, when `explicitEnd = true`
 and response is already pending.
@@ -388,7 +388,7 @@ ___
 
 ###  flushHeaders
 
-▸ **flushHeaders**(`statusCode?`: *undefined | number*): *this*
+▸ **flushHeaders**(`statusCode?`: undefined | number): *this*
 
 Writes headers to the response.
 
@@ -436,9 +436,9 @@ ___
 
 ###  getHeader
 
-▸ **getHeader**(`key`: *string*): *any*
+▸ **getHeader**(`key`: string): *any*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
 Returns the existing value for a given HTTP response
 header.
@@ -455,12 +455,12 @@ ___
 
 ###  header
 
-▸ **header**(`key`: *string*, `value`: *[CastableHeader](../modules/_poppinss_response.md#castableheader)*): *this*
+▸ **header**(`key`: string, `value`: [CastableHeader](../modules/_contracts_.md#castableheader)): *this*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
 Set header on the response. To `append` values to the existing header, we suggest
-using [append](_poppinss_response.response.md#append) method.
+using [append](_response_.response.md#append) method.
 
 If `value` is non existy, then header won't be set.
 
@@ -474,7 +474,7 @@ response.header('content-type', 'application/json')
 Name | Type |
 ------ | ------ |
 `key` | string |
-`value` | [CastableHeader](../modules/_poppinss_response.md#castableheader) |
+`value` | [CastableHeader](../modules/_contracts_.md#castableheader) |
 
 **Returns:** *this*
 
@@ -482,11 +482,11 @@ ___
 
 ###  json
 
-▸ **json**(`body`: *any*, `generateEtag?`: *undefined | false | true*): *void*
+▸ **json**(`body`: any, `generateEtag?`: undefined | false | true): *void*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
-Alias of [send](_poppinss_response.response.md#send)
+Alias of [send](_response_.response.md#send)
 
 **Parameters:**
 
@@ -501,7 +501,7 @@ ___
 
 ###  jsonp
 
-▸ **jsonp**(`body`: *any*, `callbackName`: *string*, `generateEtag`: *boolean*): *void*
+▸ **jsonp**(`body`: any, `callbackName`: string, `generateEtag`: boolean): *void*
 
 Writes response as JSONP. The callback name is resolved as follows, with priority
 from top to bottom.
@@ -528,9 +528,9 @@ ___
 
 ###  location
 
-▸ **location**(`url`: *string*): *this*
+▸ **location**(`url`: string): *this*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
 Set the location header.
 
@@ -551,9 +551,9 @@ ___
 
 ###  plainCookie
 
-▸ **plainCookie**(`key`: *string*, `value`: *any*, `options?`: *`Partial<CookieOptions>`*): *this*
+▸ **plainCookie**(`key`: string, `value`: any, `options?`: `Partial<CookieOptions>`): *this*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
 Set unsigned cookie as the response header. The inline options overrides
 all options from the config (means they are not merged)
@@ -572,7 +572,7 @@ ___
 
 ###  redirect
 
-▸ **redirect**(`url`: *string*, `sendQueryParams?`: *undefined | false | true*, `statusCode`: *number*): *void*
+▸ **redirect**(`url`: string, `sendQueryParams?`: undefined | false | true, `statusCode`: number): *void*
 
 Redirect request to a different URL. Current request `query string` can be forwared
 by setting 2nd param to `true`.
@@ -591,9 +591,9 @@ ___
 
 ###  removeHeader
 
-▸ **removeHeader**(`key`: *string*): *this*
+▸ **removeHeader**(`key`: string): *this*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
 Removes the existing response header from being sent.
 
@@ -609,9 +609,9 @@ ___
 
 ###  safeHeader
 
-▸ **safeHeader**(`key`: *string*, `value`: *[CastableHeader](../modules/_poppinss_response.md#castableheader)*): *this*
+▸ **safeHeader**(`key`: string, `value`: [CastableHeader](../modules/_contracts_.md#castableheader)): *this*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
 Adds HTTP response header, when it doesn't exists already.
 
@@ -620,7 +620,7 @@ Adds HTTP response header, when it doesn't exists already.
 Name | Type |
 ------ | ------ |
 `key` | string |
-`value` | [CastableHeader](../modules/_poppinss_response.md#castableheader) |
+`value` | [CastableHeader](../modules/_contracts_.md#castableheader) |
 
 **Returns:** *this*
 
@@ -628,9 +628,9 @@ ___
 
 ###  safeStatus
 
-▸ **safeStatus**(`code`: *number*): *this*
+▸ **safeStatus**(`code`: number): *this*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
 Set's status code only when it's not explictly
 set
@@ -647,7 +647,7 @@ ___
 
 ###  send
 
-▸ **send**(`body`: *any*, `generateEtag`: *boolean*): *void*
+▸ **send**(`body`: any, `generateEtag`: boolean): *void*
 
 Send the body as response and optionally generate etag. The default value
 is read from `config/app.js` file, using `http.etag` property.
@@ -668,7 +668,7 @@ ___
 
 ###  setEtag
 
-▸ **setEtag**(`body`: *any*, `weak`: *boolean*): *this*
+▸ **setEtag**(`body`: any, `weak`: boolean): *this*
 
 Set etag by computing hash from the body. This class will set the etag automatically
 when `etag = true` in the defined config object.
@@ -688,9 +688,9 @@ ___
 
 ###  status
 
-▸ **status**(`code`: *number*): *this*
+▸ **status**(`code`: number): *this*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
 Set HTTP status code
 
@@ -706,7 +706,7 @@ ___
 
 ###  stream
 
-▸ **stream**(`body`: *[ResponseStream](../modules/_poppinss_response.md#responsestream)*, `raiseErrors`: *boolean*): *`Promise<Error | void>`*
+▸ **stream**(`body`: [ResponseStream](../modules/_contracts_.md#responsestream), `raiseErrors`: boolean): *`Promise<Error | void>`*
 
 Pipe stream to the response. This method will gracefully destroy
 the stream, avoiding memory leaks.
@@ -735,7 +735,7 @@ try {
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`body` | [ResponseStream](../modules/_poppinss_response.md#responsestream) | - |
+`body` | [ResponseStream](../modules/_contracts_.md#responsestream) | - |
 `raiseErrors` | boolean | false |
 
 **Returns:** *`Promise<Error | void>`*
@@ -744,9 +744,9 @@ ___
 
 ###  type
 
-▸ **type**(`type`: *string*, `charset?`: *undefined | string*): *this*
+▸ **type**(`type`: string, `charset?`: undefined | string): *this*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
 Set response type by looking up for the mime-type using
 partial types like file extensions.
@@ -772,9 +772,9 @@ ___
 
 ###  vary
 
-▸ **vary**(`field`: *string*): *this*
+▸ **vary**(`field`: string): *this*
 
-*Implementation of [ResponseContract](../interfaces/_poppinss_response.responsecontract.md)*
+*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
 Set the Vary HTTP header
 
@@ -790,7 +790,7 @@ ___
 
 ### `Static` getGetter
 
-▸ **getGetter**(`name`: *string*): *`MacroableFn` | undefined*
+▸ **getGetter**(`name`: string): *`MacroableFn` | undefined*
 
 *Inherited from void*
 
@@ -806,7 +806,7 @@ ___
 
 ### `Static` getMacro
 
-▸ **getMacro**(`name`: *string*): *`MacroableFn` | undefined*
+▸ **getMacro**(`name`: string): *`MacroableFn` | undefined*
 
 *Inherited from void*
 
@@ -822,7 +822,7 @@ ___
 
 ### `Static` getter
 
-▸ **getter**(`name`: *string*, `callback`: *`MacroableFn`*, `singleton?`: *undefined | false | true*): *void*
+▸ **getter**(`name`: string, `callback`: `MacroableFn`, `singleton?`: undefined | false | true): *void*
 
 *Inherited from void*
 
@@ -840,7 +840,7 @@ ___
 
 ### `Static` hasGetter
 
-▸ **hasGetter**(`name`: *string*): *boolean*
+▸ **hasGetter**(`name`: string): *boolean*
 
 *Inherited from void*
 
@@ -856,7 +856,7 @@ ___
 
 ### `Static` hasMacro
 
-▸ **hasMacro**(`name`: *string*): *boolean*
+▸ **hasMacro**(`name`: string): *boolean*
 
 *Inherited from void*
 
@@ -882,7 +882,7 @@ ___
 
 ### `Static` macro
 
-▸ **macro**(`name`: *string*, `callback`: *`MacroableFn`*): *void*
+▸ **macro**(`name`: string, `callback`: `MacroableFn`): *void*
 
 *Inherited from void*
 

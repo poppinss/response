@@ -2,8 +2,9 @@
 
 [Globals](README.md) /
 
-### Index
+## Index
 
-#### External modules
+### External modules
 
-* [@poppinss/response](modules/_poppinss_response.md)
+* ["Response"](modules/_response_.md)
+* ["contracts"](modules/_contracts_.md)

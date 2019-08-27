@@ -28,22 +28,22 @@
   "license": "MIT",
   "devDependencies": {
     "@adonisjs/mrm-preset": "^2.0.3",
-    "@types/node": "^12.6.8",
+    "@types/node": "^12.7.2",
     "commitizen": "^4.0.3",
     "cz-conventional-changelog": "^3.0.2",
     "del-cli": "^2.0.0",
     "doctoc": "^1.4.0",
-    "husky": "^3.0.1",
+    "husky": "^3.0.4",
     "japa": "^2.0.10",
     "mrm": "^1.2.2",
     "np": "^5.0.3",
     "supertest": "^4.0.2",
     "ts-node": "^8.3.0",
-    "tslint": "^5.18.0",
+    "tslint": "^5.19.0",
     "tslint-eslint-rules": "^5.4.0",
     "typedoc": "^0.15.0",
     "typedoc-plugin-external-module-name": "^2.1.0",
-    "typedoc-plugin-markdown": "^2.1.0",
+    "typedoc-plugin-markdown": "^2.1.4",
     "typescript": "^3.5.3"
   },
   "nyc": {
@@ -74,7 +74,7 @@
     "fresh": "^0.5.2",
     "macroable": "^2.0.2",
     "on-finished": "^2.3.0",
-    "ts-essentials": "^3.0.0",
+    "ts-essentials": "^3.0.2",
     "vary": "^1.1.2"
   },
   "np": {

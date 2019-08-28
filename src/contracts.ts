@@ -58,7 +58,6 @@ export type ResponseConfigContract = {
  * Main response interface
  */
 export interface ResponseContract {
-  explicitEnd: boolean
   hasLazyBody: boolean
   lazyBody: LazyBody | null
   finished: boolean
@@ -84,15 +83,24 @@ export interface ResponseContract {
   json (body: any, generateEtag?: boolean): void
   jsonp (body: any, callbackName?: string, generateEtag?: boolean): void
 
-  stream (stream: ResponseStream, raiseErrors?: boolean): Promise<Error | void>
-  download (filePath: string, generateEtag?: boolean, raiseErrors?: boolean): Promise<Error | void>
+  stream (
+    stream: ResponseStream,
+    errorCallback?: ((error: NodeJS.ErrnoException) => any),
+  ): void
+
+  download (
+    filePath: string,
+    generateEtag?: boolean,
+    errorCallback?: ((error: NodeJS.ErrnoException) => any),
+  ): void
+
   attachment (
     filePath: string,
     name?: string,
     disposition?: string,
     generateEtag?: boolean,
-    raiseErrors?: boolean,
-  ): Promise<Error | void>
+    errorCallback?: ((error: NodeJS.ErrnoException) => any),
+  ): void
 
   location (url: string): this
   redirect (url: string, reflectQueryParams?: boolean, statusCode?: number): void

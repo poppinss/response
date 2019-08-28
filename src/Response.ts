@@ -74,8 +74,6 @@ function statFn (filePath: string): Promise<Stats> {
  * 3. The call to `finish` method is a noop.
  */
 export class Response extends Macroable implements ResponseContract {
-  public explicitEnd = false
-
   /**
    * Lazy body is used to set the response body. However, do not
    * write it on the socket immediately unless `response.finish`
@@ -223,6 +221,122 @@ export class Response extends Macroable implements ResponseContract {
      */
     this.header('Content-Length', Buffer.byteLength(body))
     this._end(body)
+  }
+
+  /**
+   * Stream the body to the response and handles cleaning up the stream
+   */
+  private _streamBody (body: ResponseStream, errorCallback?: ((error) => any)) {
+    return new Promise((resolve) => {
+      let finished = false
+
+      /**
+       * Listen for errors on the stream and properly destroy
+       * stream
+       */
+      body.on('error', (error) => {
+        /* istanbul ignore if */
+        if (finished) {
+          return
+        }
+
+        finished = true
+        destroy(body)
+
+        if (typeof (errorCallback) === 'function') {
+          this._end(errorCallback(error))
+        } else {
+          this._end(
+            error.code === 'ENOENT' ? 'File not found' : 'Cannot process file',
+            error.status || 500,
+          )
+          resolve()
+        }
+      })
+
+      /**
+       * Listen for end and resolve the promise
+       */
+      body.on('end', resolve)
+
+      /**
+       * Cleanup stream when finishing response
+       */
+      onFinished(this.response, () => {
+        finished = true
+        destroy(body)
+      })
+
+      /**
+       * Pipe stream
+       */
+      this.flushHeaders()
+      body.pipe(this.response)
+    })
+  }
+
+  /**
+   * Downloads a file by streaming it to the response
+   */
+  private async _download (
+    filePath: string,
+    generateEtag: boolean,
+    errorCallback?: ((error) => any),
+  ) {
+    try {
+      const stats = await statFn(filePath)
+      if (!stats || !stats.isFile()) {
+        throw new Error('response.download only accepts path to a file')
+      }
+
+      /**
+       * Set appropriate headers
+       */
+      this.header('Last-Modified', stats.mtime.toUTCString())
+      this.header('Content-length', stats.size)
+      this.type(extname(filePath))
+
+      /**
+       * Set the etag when instructed.
+       */
+      if (generateEtag) {
+        this.setEtag(stats, true)
+      }
+
+      /**
+       * Do not stream files for HEAD request, but set the appropriate
+       * status code.
+       *
+       * 200: When not using etags or cache is not fresh. This forces browser
+       *      to always make a GET request
+       *
+       * 304: When etags are used and cache is fresh
+       */
+      if (this.request.method === 'HEAD') {
+        this._end(null, generateEtag && this.fresh() ? 304 : 200)
+        return
+      }
+
+      /**
+       * Regardless of request method, if we are using etags and
+       * cache is fresh, then we must respond with 304
+       */
+      if (generateEtag && this.fresh()) {
+        this._end(null, 304)
+        return
+      }
+
+      /**
+       * Finally stream the file
+       */
+      return this._streamBody(createReadStream(filePath), errorCallback)
+    } catch (error) {
+      if (typeof (errorCallback) === 'function') {
+        this._end(errorCallback(error))
+      } else {
+        this._end('Cannot process file', 404)
+      }
+    }
   }
 
   /**
@@ -439,7 +553,7 @@ export class Response extends Macroable implements ResponseContract {
    * when unable to parse the body type.
    */
   public buildResponseBody (body: any): { body: any, type: ResponseContentType, originalType?: string } {
-    if (!body) {
+    if (body === null || body === undefined) {
       return {
         body: null,
         type: 'null',
@@ -451,10 +565,15 @@ export class Response extends Macroable implements ResponseContract {
      * plain string
      */
     if (typeof (body) === 'string') {
-      return {
-        body,
-        type: /^\s*</.test(body) ? 'text/html' : 'text/plain',
-      }
+      return body.length === 0
+        ? {
+          body: null,
+          type: 'null',
+        }
+        : {
+          body,
+          type: /^\s*</.test(body) ? 'text/html' : 'text/plain',
+        }
     }
 
     /**
@@ -505,15 +624,10 @@ export class Response extends Macroable implements ResponseContract {
    * behavior and do not change, unless you know what you are doing.
    */
   public send (body: any, generateEtag: boolean = this._config.etag): void {
-    if (this.explicitEnd) {
-      this.lazyBody = {
-        writer: this._writeBody,
-        args: [body, generateEtag],
-      }
-      return
+    this.lazyBody = {
+      writer: this._writeBody,
+      args: [body, generateEtag],
     }
-
-    this._writeBody(body, generateEtag)
   }
 
   /**
@@ -540,15 +654,10 @@ export class Response extends Macroable implements ResponseContract {
     callbackName: string = this._config.jsonpCallbackName,
     generateEtag: boolean = this._config.etag,
   ) {
-    if (this.explicitEnd) {
-      this.lazyBody = {
-        writer: this._writeBody,
-        args: [body, generateEtag, callbackName],
-      }
-      return
+    this.lazyBody = {
+      writer: this._writeBody,
+      args: [body, generateEtag, callbackName],
     }
-
-    this._writeBody(body, generateEtag, callbackName)
   }
 
   /**
@@ -575,63 +684,15 @@ export class Response extends Macroable implements ResponseContract {
    * }
    * ```
    */
-  public stream (body: ResponseStream, raiseErrors: boolean = false): Promise<Error | void> {
+  public stream (body: ResponseStream, errorCallback?: ((error: NodeJS.ErrnoException) => any)): void {
     if (typeof (body.pipe) !== 'function' || !body.readable || typeof (body.read) !== 'function') {
       throw new Error('response.stream accepts a readable stream only')
     }
 
-    return new Promise((resolve, reject) => {
-      /**
-       * It is important to set `explicitEnd=false` to avoid
-       * buffered response during streaming
-       */
-      this.explicitEnd = false
-
-      let finished = false
-
-      /**
-       * Listen for errors on the stream and properly destroy
-       * stream
-       */
-      body.on('error', (error) => {
-        /* istanbul ignore if */
-        if (finished) {
-          return
-        }
-
-        finished = true
-        destroy(body)
-
-        if (raiseErrors) {
-          reject(error)
-        } else {
-          this._end(
-            error.code === 'ENOENT' ? 'File not found' : 'Cannot process file',
-            error.status || 500,
-          )
-          resolve()
-        }
-      })
-
-      /**
-       * Listen for end and resolve the promise
-       */
-      body.on('end', resolve)
-
-      /**
-       * Cleanup stream when finishing response
-       */
-      onFinished(this.response, () => {
-        finished = true
-        destroy(body)
-      })
-
-      /**
-       * Pipe stream
-       */
-      this.flushHeaders()
-      body.pipe(this.response)
-    })
+    this.lazyBody = {
+      writer: this._streamBody,
+      args: [body, errorCallback],
+    }
   }
 
   /**
@@ -659,73 +720,14 @@ export class Response extends Macroable implements ResponseContract {
    * }
    * ```
    */
-  public async download (
+  public download (
     filePath: string,
     generateEtag: boolean = this._config.etag,
-    raiseErrors: boolean = false,
-  ) {
-    this.explicitEnd = false
-
-    try {
-      const stats = await statFn(filePath)
-      if (!stats || !stats.isFile()) {
-        throw new Error('response.download only accepts path to a file')
-      }
-
-      /**
-       * Set appropriate headers
-       */
-      this.header('Last-Modified', stats.mtime.toUTCString())
-      this.header('Content-length', stats.size)
-      this.type(extname(filePath))
-
-      /**
-       * If etags are disabled, then stream the file right away, otherwise
-       * we need to for cache based on etag.
-       */
-      if (!generateEtag) {
-        if (this.request.method === 'HEAD') {
-          this._end()
-          return
-        }
-
-        /**
-         * Stream if not HEAD request
-         */
-        return this.stream(createReadStream(filePath), raiseErrors)
-      }
-
-      this.setEtag(stats, true)
-      const fresh = this.fresh()
-
-      /**
-       * If cache is fresh then always response with 304 for
-       * GET and HEAD requests.
-       */
-      if (fresh) {
-        this._end(null, 304)
-        return
-      }
-
-      /**
-       * If request is HEAD and response is not fresh, then respond
-       * with a 200 and ask the browser to initiate the GET request.
-       */
-      if (this.request.method === 'HEAD') {
-        this._end(null, 200)
-        return
-      }
-
-      /**
-       * Finally stream the file
-       */
-      return this.stream(createReadStream(filePath), raiseErrors)
-    } catch (error) {
-      if (raiseErrors) {
-        throw error
-      } else {
-        this._end('Cannot process file', 404)
-      }
+    errorCallback?: ((error: NodeJS.ErrnoException) => any),
+  ): void {
+    this.lazyBody = {
+      writer: this._download,
+      args: [filePath, generateEtag, errorCallback],
     }
   }
 
@@ -735,16 +737,16 @@ export class Response extends Macroable implements ResponseContract {
    *
    * Internally calls [[download]]
    */
-  public async attachment (
+  public attachment (
     filePath: string,
     name?: string,
     disposition?: string,
     generateEtag?: boolean,
-    raiseErrors?: boolean,
+    errorCallback?: ((error: NodeJS.ErrnoException) => any),
   ) {
     name = name || filePath
     this.header('Content-Disposition', contentDisposition(name, { type: disposition }))
-    return this.download(filePath, generateEtag, raiseErrors)
+    return this.download(filePath, generateEtag, errorCallback)
   }
 
   /**
@@ -766,11 +768,10 @@ export class Response extends Macroable implements ResponseContract {
    */
   public redirect (url: string, sendQueryParams?: boolean, statusCode: number = 302): void {
     url = sendQueryParams ? `${url}?${parse(this.request.url!, false).query}` : url
-
-    this.explicitEnd = false
-
     this.location(url)
-    this._end(`Redirecting to ${url}`, statusCode)
+    this.safeStatus(statusCode || 302)
+    this.type('text/plain; charset=utf-8')
+    this.send(`Redirecting to ${url}`)
   }
 
   /**
@@ -828,9 +829,11 @@ export class Response extends Macroable implements ResponseContract {
    * Calling this method twice or when `explicitEnd = false` is noop.
    */
   public finish () {
-    if (this.explicitEnd && this.lazyBody && this.isPending) {
+    if (this.lazyBody && this.isPending) {
       this.lazyBody.writer.bind(this)(...this.lazyBody.args)
       this.lazyBody = null
+    } else if (this.isPending) {
+      this._end()
     }
   }
 }

@@ -253,7 +253,7 @@ test.group('Response', (group) => {
     assert.deepEqual(body, { username: 'virk' })
   })
 
-  test('return content type as null for empty string', async (assert) => {
+  test('set content type as null for empty string', async (assert) => {
     const server = createServer((req, res) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
@@ -284,7 +284,6 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
 
-      response.explicitEnd = true
       response.send({ username: 'virk' })
       res.write('hello')
       res.end()
@@ -299,21 +298,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.send({ username: 'virk' })
-    })
-
-    const { body } = await supertest(server)
-      .get('/')
-      .expect('content-type', 'application/json; charset=utf-8')
-      .expect('content-length', '19')
-
-    assert.deepEqual(body, { username: 'virk' })
-  })
-
-  test('write send body when implicit end is off', async (assert) => {
-    const server = createServer((req, res) => {
-      const config = fakeConfig()
-      const response = new Response(req, res, config)
-      response.send({ username: 'virk' })
+      response.finish()
     })
 
     const { body } = await supertest(server)
@@ -329,7 +314,6 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
 
-      response.explicitEnd = true
       response.json({ username: 'virk' })
       response.finish()
       response.finish()
@@ -348,7 +332,6 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
 
-      response.explicitEnd = true
       response.json({ username: 'virk' })
       res.end(String(response.hasLazyBody))
     })
@@ -362,6 +345,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.jsonp({ username: 'virk' })
+      response.finish()
     })
 
     const { text } = await supertest(server).get('/')
@@ -370,25 +354,12 @@ test.group('Response', (group) => {
     assert.equal(text, `/**/ typeof callback === 'function' && callback(${JSON.stringify(body)});`)
   })
 
-  test('write jsonp response immediately when explicitEnd is false', async (assert) => {
-    const server = createServer((req, res) => {
-      const config = fakeConfig()
-      const response = new Response(req, res, config)
-      response.explicitEnd = false
-      response.jsonp({ username: 'virk' })
-    })
-
-    const { text } = await supertest(server).get('/')
-
-    const body = { username: 'virk' }
-    assert.equal(text, `/**/ typeof callback === 'function' && callback(${JSON.stringify(body)});`)
-  })
-
-  test('use explicit value as callback name', async (assert) => {
+  test('use explicit value for callback name', async (assert) => {
     const server = createServer((req, res) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.jsonp({ username: 'virk' }, 'fn')
+      response.finish()
     })
 
     const { text } = await supertest(server).get('/?callback=cb')
@@ -402,6 +373,7 @@ test.group('Response', (group) => {
       const config = fakeConfig({ jsonpCallbackName: 'cb' })
       const response = new Response(req, res, config)
       response.jsonp({ username: 'virk' })
+      response.finish()
     })
 
     const { text } = await supertest(server).get('/')
@@ -416,7 +388,8 @@ test.group('Response', (group) => {
     const server = createServer((req, res) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
-      response.stream(createReadStream(join(fs.basePath, 'hello.txt')), true)
+      response.stream(createReadStream(join(fs.basePath, 'hello.txt')))
+      response.finish()
     })
 
     const { text } = await supertest(server).get('/')
@@ -430,19 +403,16 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
 
-      try {
-        const stream = response.stream as any
-        stream('hello', true)
-      } catch ({ message }) {
-        assert.equal(message, 'response.stream accepts a readable stream only')
-        res.end()
-      }
+      const stream = response.stream as any
+      const fn = () => stream('hello')
+      assert.throw(fn, 'response.stream accepts a readable stream only')
+      response.finish()
     })
 
     await supertest(server).get('/')
   })
 
-  test('raise error when input is not a readable stream', async (assert) => {
+  test('raise error when input is a writable stream', async (assert) => {
     assert.plan(1)
     await fs.ensureRoot()
 
@@ -451,14 +421,11 @@ test.group('Response', (group) => {
       const response = new Response(req, res, config)
       const writeStream = createWriteStream(join(fs.basePath, 'hello.txt'))
 
-      try {
-        const stream = response.stream as any
-        await stream(writeStream, true)
-      } catch ({ message }) {
-        assert.equal(message, 'response.stream accepts a readable stream only')
-        writeStream.close()
-        res.end()
-      }
+      const stream = response.stream as any
+      const fn = () => stream(writeStream)
+      assert.throw(fn, 'response.stream accepts a readable stream only')
+      writeStream.close()
+      response.finish()
     })
 
     await supertest(server).get('/')
@@ -470,52 +437,60 @@ test.group('Response', (group) => {
     const server = createServer((req, res) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
-      response.stream(createReadStream(join(fs.basePath, 'hello.txt')), true)
+      response.stream(createReadStream(join(fs.basePath, 'hello.txt')))
+      response.finish()
     })
 
     const requests = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(() => supertest(server).get('/').expect(200))
     await Promise.all(requests)
   })
 
-  test('should not hit the maxListeners when making more than 10 calls with errors', async () => {
-    const server = createServer((req, res) => {
-      const config = fakeConfig()
-      const response = new Response(req, res, config)
-      response
-        .stream(createReadStream(join(fs.basePath, 'hello.txt')), true)
-        .catch((error) => {
-          res.end(error.message)
-        })
-    })
-
-    const requests = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(() => supertest(server).get('/'))
-    await Promise.all(requests)
-  })
-
   test('raise error when stream raises one', async (assert) => {
-    const server = createServer((req, res) => {
+    await fs.add('hello.txt', 'hello world')
+
+    const server = createServer(async (req, res) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
-      response
-        .stream(createReadStream(join(fs.basePath, 'hello.txt')), true)
-        .catch((error) => {
-          res.end(error.code)
-        })
+
+      const readStream = createReadStream(join(fs.basePath, 'hello.txt'))
+
+      /**
+       * Forcing stream to emit error
+       */
+      readStream._read = function _read () {
+        readStream.emit('error', new Error('Missing file'))
+      }
+
+      response.stream(readStream, ({ message }) => message)
+      response.finish()
     })
 
     const { text } = await supertest(server).get('/')
-    assert.oneOf(text, ['ENOENT', 'EPERM'])
+    assert.equal(text, 'Missing file')
   })
 
   test('send stream errors vs raising them', async (assert) => {
+    await fs.add('hello.txt', 'hello world')
+
     const server = createServer((req, res) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
-      response.stream(createReadStream(join(fs.basePath, 'hello.txt')))
+
+      const readStream = createReadStream(join(fs.basePath, 'hello.txt'))
+
+      /**
+       * Forcing stream to emit error
+       */
+      readStream._read = function _read () {
+        readStream.emit('error', new Error('Missing file'))
+      }
+
+      response.stream(readStream)
+      response.finish()
     })
 
     const { text } = await supertest(server).get('/')
-    assert.oneOf(text, ['File not found', 'Cannot process file'])
+    assert.equal(text, 'Cannot process file')
   })
 
   test('download file with correct content type', async (assert) => {
@@ -525,6 +500,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.download(join(fs.basePath, 'hello.html'))
+      response.finish()
     })
 
     const { text } = await supertest(server)
@@ -540,6 +516,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.download(join(fs.basePath))
+      response.finish()
     })
 
     const { text } = await supertest(server).get('/').expect(404)
@@ -551,6 +528,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.download(join(fs.basePath, 'hello.html'))
+      response.finish()
     })
 
     const { text } = await supertest(server).get('/').expect(404)
@@ -562,16 +540,12 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
 
-      try {
-        await response.download(join(fs.basePath, 'hello.html'), false, true)
-      } catch (error) {
-        res.writeHead(404)
-        res.end('Custom error during file processing')
-      }
+      response.download(join(fs.basePath, 'hello.html'), false)
+      response.finish()
     })
 
     const { text } = await supertest(server).get('/').expect(404)
-    assert.equal(text, 'Custom error during file processing')
+    assert.equal(text, 'Cannot process file')
   })
 
   test('do not stream file on HEAD calls', async (assert) => {
@@ -581,6 +555,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.download(join(fs.basePath, 'hello.html'))
+      response.finish()
     })
 
     const { text } = await supertest(server).head('/').expect(200)
@@ -594,6 +569,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.download(join(fs.basePath, 'hello.html'), true)
+      response.finish()
     })
 
     const stats = await fs.fsExtra.stat(join(fs.basePath, 'hello.html'))
@@ -613,6 +589,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.download(join(fs.basePath, 'hello.html'), true)
+      response.finish()
     })
 
     const stats = await fs.fsExtra.stat(join(fs.basePath, 'hello.html'))
@@ -632,6 +609,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.attachment(join(fs.basePath, 'hello.html'))
+      response.finish()
     })
 
     const { text } = await supertest(server)
@@ -650,6 +628,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.attachment(join(fs.basePath, 'hello.html'), 'ooo.html')
+      response.finish()
     })
 
     const { text } = await supertest(server)
@@ -668,6 +647,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.attachment(join(fs.basePath, 'hello.html'), 'ooo.html', 'inline')
+      response.finish()
     })
 
     const { text } = await supertest(server)
@@ -684,6 +664,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.redirect('/foo')
+      response.finish()
     })
 
     const { headers } = await supertest(server).get('/').redirects(1)
@@ -695,6 +676,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.redirect('/foo', true)
+      response.finish()
     })
 
     const { headers } = await supertest(server).get('/?username=virk').redirects(1)
@@ -706,6 +688,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.redirect('/foo', false, 301)
+      response.finish()
     })
 
     await supertest(server).get('/').redirects(1).expect(301)
@@ -717,7 +700,7 @@ test.group('Response', (group) => {
       const response = new Response(req, res, config)
       response.vary('Origin')
       response.vary('Set-Cookie')
-      res.end()
+      response.finish()
     })
 
     await supertest(server).get('/').expect('Vary', 'Origin, Set-Cookie')
@@ -728,6 +711,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.send('')
+      response.finish()
     })
 
     await supertest(server).get('/').expect(204)
@@ -738,6 +722,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.status(200).send('')
+      response.finish()
     })
 
     await supertest(server).get('/').expect(200)
@@ -750,6 +735,7 @@ test.group('Response', (group) => {
       response.header('Content-type', 'application/json')
       response.status(204)
       response.send({ username: 'virk' })
+      response.finish()
     })
 
     const { headers } = await supertest(server).get('/').expect(204)
@@ -763,6 +749,7 @@ test.group('Response', (group) => {
       })
       const response = new Response(req, res, config)
       response.send({ username: 'virk' })
+      response.finish()
     })
 
     const responseEtag = etag(JSON.stringify({ username: 'virk' }))
@@ -774,6 +761,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.send(22)
+      response.finish()
     })
 
     const { text } = await supertest(server).get('/')
@@ -784,11 +772,12 @@ test.group('Response', (group) => {
     const server = createServer((req, res) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
-      response.send(true)
+      response.send(false)
+      response.finish()
     })
 
     const { text } = await supertest(server).get('/')
-    assert.equal(text, 'true')
+    assert.equal(text, 'false')
   })
 
   test('raise error when return type is not valid', async (assert) => {
@@ -798,6 +787,7 @@ test.group('Response', (group) => {
 
       try {
         response.send(function foo () {})
+        response.finish()
       } catch (error) {
         res.write(error.message)
         res.end()
@@ -821,6 +811,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.send(new User())
+      response.finish()
     })
 
     const { body } = await supertest(server).get('/')
@@ -834,6 +825,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.download(join(fs.basePath, 'hello.html'), true)
+      response.finish()
     })
 
     const { text } = await supertest(server)
@@ -851,6 +843,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.download(join(fs.basePath, 'hello.html'), true)
+      response.finish()
     })
 
     const { text } = await supertest(server)
@@ -866,6 +859,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.type('plain/text', 'ascii').send('done')
+      response.finish()
     })
 
     const { text } = await supertest(server)
@@ -881,6 +875,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.cookie('name', 'virk').send('done')
+      response.finish()
     })
 
     const { headers } = await supertest(server).get('/').expect(200)
@@ -905,6 +900,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.plainCookie('name', 'virk').send('done')
+      response.finish()
     })
 
     const { headers } = await supertest(server).get('/').expect(200)
@@ -929,6 +925,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.cookie('name', 'virk', { domain: 'foo.com' }).send('done')
+      response.finish()
     })
 
     const { headers } = await supertest(server).get('/').expect(200)
@@ -953,6 +950,7 @@ test.group('Response', (group) => {
       const config = fakeConfig()
       const response = new Response(req, res, config)
       response.clearCookie('name').send('done')
+      response.finish()
     })
 
     const { headers } = await supertest(server).get('/').expect(200)

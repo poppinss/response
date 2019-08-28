@@ -1,6 +1,6 @@
-> **[@poppinss/response](../README.md)**
+**[@poppinss/response](../README.md)**
 
-[Globals](../README.md) / ["contracts"](_contracts_.md) /
+[Globals](../README.md) › ["contracts"](_contracts_.md)
 
 # External module: "contracts"
 
@@ -59,6 +59,6 @@ ___
 
 ###  ResponseStream
 
-Ƭ **ResponseStream**: *`ReadStream` | `ReadWriteStream` | `ReadableStream`*
+Ƭ **ResponseStream**: *ReadStream | ReadWriteStream | ReadableStream*
 
 Types of readable stream allowed for HTTP response

@@ -1,6 +1,6 @@
-> **[@poppinss/response](../README.md)**
+**[@poppinss/response](../README.md)**
 
-[Globals](../README.md) / ["Response"](../modules/_response_.md) / [Response](_response_.response.md) /
+[Globals](../README.md) › ["Response"](../modules/_response_.md) › [Response](_response_.response.md)
 
 # Class: Response
 
@@ -28,7 +28,7 @@ This is how `explicitEnd` mode works in nutshell.
 
 ## Hierarchy
 
-* `Macroable`
+* Macroable
 
   * **Response**
 
@@ -44,7 +44,6 @@ This is how `explicitEnd` mode works in nutshell.
 
 ### Properties
 
-* [explicitEnd](_response_.response.md#explicitend)
 * [lazyBody](_response_.response.md#lazybody)
 * [request](_response_.response.md#request)
 * [response](_response_.response.md#response)
@@ -97,27 +96,19 @@ This is how `explicitEnd` mode works in nutshell.
 
 ###  constructor
 
-\+ **new Response**(`request`: `IncomingMessage`, `response`: `ServerResponse`, `_config`: `DeepReadonly<ResponseConfigContract>`): *[Response](_response_.response.md)*
+\+ **new Response**(`request`: IncomingMessage, `response`: ServerResponse, `_config`: DeepReadonly‹[ResponseConfigContract](../modules/_contracts_.md#responseconfigcontract)›): *[Response](_response_.response.md)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`request` | `IncomingMessage` |
-`response` | `ServerResponse` |
-`_config` | `DeepReadonly<ResponseConfigContract>` |
+`request` | IncomingMessage |
+`response` | ServerResponse |
+`_config` | DeepReadonly‹[ResponseConfigContract](../modules/_contracts_.md#responseconfigcontract)› |
 
 **Returns:** *[Response](_response_.response.md)*
 
 ## Properties
-
-###  explicitEnd
-
-• **explicitEnd**: *boolean* = false
-
-*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md).[explicitEnd](../interfaces/_contracts_.responsecontract.md#explicitend)*
-
-___
 
 ###  lazyBody
 
@@ -135,7 +126,7 @@ ___
 
 ###  request
 
-• **request**: *`IncomingMessage`*
+• **request**: *IncomingMessage*
 
 *Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md).[request](../interfaces/_contracts_.responsecontract.md#request)*
 
@@ -143,7 +134,7 @@ ___
 
 ###  response
 
-• **response**: *`ServerResponse`*
+• **response**: *ServerResponse*
 
 *Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md).[response](../interfaces/_contracts_.responsecontract.md#response)*
 
@@ -244,9 +235,7 @@ ___
 
 ###  attachment
 
-▸ **attachment**(`filePath`: string, `name?`: undefined | string, `disposition?`: undefined | string, `generateEtag?`: undefined | false | true, `raiseErrors?`: undefined | false | true): *`Promise<void | Error>`*
-
-*Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
+▸ **attachment**(`filePath`: string, `name?`: undefined | string, `disposition?`: undefined | string, `generateEtag?`: undefined | false | true, `errorCallback?`: undefined | function): *void*
 
 Download the file by forcing the user to save the file vs displaying it
 within the browser.
@@ -261,9 +250,9 @@ Name | Type |
 `name?` | undefined \| string |
 `disposition?` | undefined \| string |
 `generateEtag?` | undefined \| false \| true |
-`raiseErrors?` | undefined \| false \| true |
+`errorCallback?` | undefined \| function |
 
-**Returns:** *`Promise<void | Error>`*
+**Returns:** *void*
 
 ___
 
@@ -295,7 +284,7 @@ ___
 
 ###  clearCookie
 
-▸ **clearCookie**(`key`: string, `options?`: `Partial<CookieOptions>`): *this*
+▸ **clearCookie**(`key`: string, `options?`: Partial‹CookieOptions›): *this*
 
 Clear existing cookie.
 
@@ -304,7 +293,7 @@ Clear existing cookie.
 Name | Type |
 ------ | ------ |
 `key` | string |
-`options?` | `Partial<CookieOptions>` |
+`options?` | Partial‹CookieOptions› |
 
 **Returns:** *this*
 
@@ -312,7 +301,7 @@ ___
 
 ###  cookie
 
-▸ **cookie**(`key`: string, `value`: any, `options?`: `Partial<CookieOptions>`): *this*
+▸ **cookie**(`key`: string, `value`: any, `options?`: Partial‹CookieOptions›): *this*
 
 *Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
@@ -325,7 +314,7 @@ Name | Type |
 ------ | ------ |
 `key` | string |
 `value` | any |
-`options?` | `Partial<CookieOptions>` |
+`options?` | Partial‹CookieOptions› |
 
 **Returns:** *this*
 
@@ -333,7 +322,7 @@ ___
 
 ###  download
 
-▸ **download**(`filePath`: string, `generateEtag`: boolean, `raiseErrors`: boolean): *`Promise<void | Error>`*
+▸ **download**(`filePath`: string, `generateEtag`: boolean, `errorCallback?`: undefined | function): *void*
 
 Download file by streaming it from the file path. This method will setup
 appropriate `Content-type`, `Content-type` and `Last-modified` headers.
@@ -365,9 +354,9 @@ Name | Type | Default |
 ------ | ------ | ------ |
 `filePath` | string | - |
 `generateEtag` | boolean |  this._config.etag |
-`raiseErrors` | boolean | false |
+`errorCallback?` | undefined \| function | - |
 
-**Returns:** *`Promise<void | Error>`*
+**Returns:** *void*
 
 ___
 
@@ -551,7 +540,7 @@ ___
 
 ###  plainCookie
 
-▸ **plainCookie**(`key`: string, `value`: any, `options?`: `Partial<CookieOptions>`): *this*
+▸ **plainCookie**(`key`: string, `value`: any, `options?`: Partial‹CookieOptions›): *this*
 
 *Implementation of [ResponseContract](../interfaces/_contracts_.responsecontract.md)*
 
@@ -564,7 +553,7 @@ Name | Type |
 ------ | ------ |
 `key` | string |
 `value` | any |
-`options?` | `Partial<CookieOptions>` |
+`options?` | Partial‹CookieOptions› |
 
 **Returns:** *this*
 
@@ -706,7 +695,7 @@ ___
 
 ###  stream
 
-▸ **stream**(`body`: [ResponseStream](../modules/_contracts_.md#responsestream), `raiseErrors`: boolean): *`Promise<Error | void>`*
+▸ **stream**(`body`: [ResponseStream](../modules/_contracts_.md#responsestream), `errorCallback?`: undefined | function): *void*
 
 Pipe stream to the response. This method will gracefully destroy
 the stream, avoiding memory leaks.
@@ -733,12 +722,12 @@ try {
 
 **Parameters:**
 
-Name | Type | Default |
------- | ------ | ------ |
-`body` | [ResponseStream](../modules/_contracts_.md#responsestream) | - |
-`raiseErrors` | boolean | false |
+Name | Type |
+------ | ------ |
+`body` | [ResponseStream](../modules/_contracts_.md#responsestream) |
+`errorCallback?` | undefined \| function |
 
-**Returns:** *`Promise<Error | void>`*
+**Returns:** *void*
 
 ___
 
@@ -790,7 +779,7 @@ ___
 
 ### `Static` getGetter
 
-▸ **getGetter**(`name`: string): *`MacroableFn` | undefined*
+▸ **getGetter**(`name`: string): *MacroableFn | undefined*
 
 *Inherited from void*
 
@@ -800,13 +789,13 @@ Name | Type |
 ------ | ------ |
 `name` | string |
 
-**Returns:** *`MacroableFn` | undefined*
+**Returns:** *MacroableFn | undefined*
 
 ___
 
 ### `Static` getMacro
 
-▸ **getMacro**(`name`: string): *`MacroableFn` | undefined*
+▸ **getMacro**(`name`: string): *MacroableFn | undefined*
 
 *Inherited from void*
 
@@ -816,13 +805,13 @@ Name | Type |
 ------ | ------ |
 `name` | string |
 
-**Returns:** *`MacroableFn` | undefined*
+**Returns:** *MacroableFn | undefined*
 
 ___
 
 ### `Static` getter
 
-▸ **getter**(`name`: string, `callback`: `MacroableFn`, `singleton?`: undefined | false | true): *void*
+▸ **getter**(`name`: string, `callback`: MacroableFn, `singleton?`: undefined | false | true): *void*
 
 *Inherited from void*
 
@@ -831,7 +820,7 @@ ___
 Name | Type |
 ------ | ------ |
 `name` | string |
-`callback` | `MacroableFn` |
+`callback` | MacroableFn |
 `singleton?` | undefined \| false \| true |
 
 **Returns:** *void*
@@ -882,7 +871,7 @@ ___
 
 ### `Static` macro
 
-▸ **macro**(`name`: string, `callback`: `MacroableFn`): *void*
+▸ **macro**(`name`: string, `callback`: MacroableFn): *void*
 
 *Inherited from void*
 
@@ -891,6 +880,6 @@ ___
 Name | Type |
 ------ | ------ |
 `name` | string |
-`callback` | `MacroableFn` |
+`callback` | MacroableFn |
 
 **Returns:** *void*

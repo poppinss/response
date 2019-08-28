@@ -1,6 +1,6 @@
-> **[@poppinss/response](../README.md)**
+**[@poppinss/response](../README.md)**
 
-[Globals](../README.md) / ["contracts"](../modules/_contracts_.md) / [ResponseContract](_contracts_.responsecontract.md) /
+[Globals](../README.md) › ["contracts"](../modules/_contracts_.md) › [ResponseContract](_contracts_.responsecontract.md)
 
 # Interface: ResponseContract
 
@@ -18,7 +18,6 @@ Main response interface
 
 ### Properties
 
-* [explicitEnd](_contracts_.responsecontract.md#explicitend)
 * [finished](_contracts_.responsecontract.md#finished)
 * [hasLazyBody](_contracts_.responsecontract.md#haslazybody)
 * [headersSent](_contracts_.responsecontract.md#headerssent)
@@ -55,12 +54,6 @@ Main response interface
 
 ## Properties
 
-###  explicitEnd
-
-• **explicitEnd**: *boolean*
-
-___
-
 ###  finished
 
 • **finished**: *boolean*
@@ -93,13 +86,13 @@ ___
 
 ###  request
 
-• **request**: *`IncomingMessage`*
+• **request**: *IncomingMessage*
 
 ___
 
 ###  response
 
-• **response**: *`ServerResponse`*
+• **response**: *ServerResponse*
 
 ## Methods
 
@@ -120,7 +113,7 @@ ___
 
 ###  attachment
 
-▸ **attachment**(`filePath`: string, `name?`: undefined | string, `disposition?`: undefined | string, `generateEtag?`: undefined | false | true, `raiseErrors?`: undefined | false | true): *`Promise<Error | void>`*
+▸ **attachment**(`filePath`: string, `name?`: undefined | string, `disposition?`: undefined | string, `generateEtag?`: undefined | false | true, `errorCallback?`: undefined | function): *void*
 
 **Parameters:**
 
@@ -130,9 +123,9 @@ Name | Type |
 `name?` | undefined \| string |
 `disposition?` | undefined \| string |
 `generateEtag?` | undefined \| false \| true |
-`raiseErrors?` | undefined \| false \| true |
+`errorCallback?` | undefined \| function |
 
-**Returns:** *`Promise<Error | void>`*
+**Returns:** *void*
 
 ___
 
@@ -166,7 +159,7 @@ ___
 
 ###  cookie
 
-▸ **cookie**(`key`: string, `value`: any, `options?`: `Partial<CookieOptions>`): *this*
+▸ **cookie**(`key`: string, `value`: any, `options?`: Partial‹CookieOptions›): *this*
 
 **Parameters:**
 
@@ -174,7 +167,7 @@ Name | Type |
 ------ | ------ |
 `key` | string |
 `value` | any |
-`options?` | `Partial<CookieOptions>` |
+`options?` | Partial‹CookieOptions› |
 
 **Returns:** *this*
 
@@ -182,7 +175,7 @@ ___
 
 ###  download
 
-▸ **download**(`filePath`: string, `generateEtag?`: undefined | false | true, `raiseErrors?`: undefined | false | true): *`Promise<Error | void>`*
+▸ **download**(`filePath`: string, `generateEtag?`: undefined | false | true, `errorCallback?`: undefined | function): *void*
 
 **Parameters:**
 
@@ -190,9 +183,9 @@ Name | Type |
 ------ | ------ |
 `filePath` | string |
 `generateEtag?` | undefined \| false \| true |
-`raiseErrors?` | undefined \| false \| true |
+`errorCallback?` | undefined \| function |
 
-**Returns:** *`Promise<Error | void>`*
+**Returns:** *void*
 
 ___
 
@@ -280,7 +273,7 @@ ___
 
 ###  plainCookie
 
-▸ **plainCookie**(`key`: string, `value`: any, `options?`: `Partial<CookieOptions>`): *this*
+▸ **plainCookie**(`key`: string, `value`: any, `options?`: Partial‹CookieOptions›): *this*
 
 **Parameters:**
 
@@ -288,7 +281,7 @@ Name | Type |
 ------ | ------ |
 `key` | string |
 `value` | any |
-`options?` | `Partial<CookieOptions>` |
+`options?` | Partial‹CookieOptions› |
 
 **Returns:** *this*
 
@@ -399,16 +392,16 @@ ___
 
 ###  stream
 
-▸ **stream**(`stream`: [ResponseStream](../modules/_contracts_.md#responsestream), `raiseErrors?`: undefined | false | true): *`Promise<Error | void>`*
+▸ **stream**(`stream`: [ResponseStream](../modules/_contracts_.md#responsestream), `errorCallback?`: undefined | function): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `stream` | [ResponseStream](../modules/_contracts_.md#responsestream) |
-`raiseErrors?` | undefined \| false \| true |
+`errorCallback?` | undefined \| function |
 
-**Returns:** *`Promise<Error | void>`*
+**Returns:** *void*
 
 ___
 

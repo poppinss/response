@@ -1,6 +1,6 @@
-> **[@poppinss/response](README.md)**
+**[@poppinss/response](README.md)**
 
-[Globals](README.md) /
+[Globals](README.md)
 
 ## Index
 

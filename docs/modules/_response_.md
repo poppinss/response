@@ -1,6 +1,6 @@
-> **[@poppinss/response](../README.md)**
+**[@poppinss/response](../README.md)**
 
-[Globals](../README.md) / ["Response"](_response_.md) /
+[Globals](../README.md) › ["Response"](_response_.md)
 
 # External module: "Response"
 

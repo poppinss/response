@@ -27,14 +27,22 @@
   "author": "virk,poppinss",
   "license": "MIT",
   "devDependencies": {
-    "@adonisjs/mrm-preset": "^2.0.3",
+    "@adonisjs/mrm-preset": "^2.1.0",
+    "@types/content-disposition": "^0.5.2",
+    "@types/destroy": "^1.0.0",
+    "@types/etag": "^1.8.0",
+    "@types/fresh": "^0.5.0",
+    "@types/mime-types": "^2.1.0",
     "@types/node": "^12.7.2",
+    "@types/on-finished": "^2.3.1",
+    "@types/supertest": "^2.0.8",
+    "@types/vary": "^1.1.0",
     "commitizen": "^4.0.3",
     "cz-conventional-changelog": "^3.0.2",
     "del-cli": "^2.0.0",
     "doctoc": "^1.4.0",
     "husky": "^3.0.4",
-    "japa": "^2.0.10",
+    "japa": "^3.0.0",
     "mrm": "^1.2.2",
     "np": "^5.0.3",
     "supertest": "^4.0.2",
@@ -44,7 +52,7 @@
     "typedoc": "^0.15.0",
     "typedoc-plugin-external-module-name": "^2.1.0",
     "typedoc-plugin-markdown": "^2.1.4",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.2"
   },
   "nyc": {
     "exclude": [
@@ -66,8 +74,8 @@
     }
   },
   "dependencies": {
-    "@poppinss/cookie": "^1.0.1",
-    "@poppinss/dev-utils": "^1.0.0",
+    "@poppinss/cookie": "^1.0.2",
+    "@poppinss/dev-utils": "^1.0.1",
     "content-disposition": "^0.5.3",
     "destroy": "^1.0.4",
     "etag": "^1.8.1",

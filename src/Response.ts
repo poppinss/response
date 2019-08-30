@@ -11,19 +11,19 @@
 * file that was distributed with this source code.
 */
 
-import { ServerResponse, IncomingMessage } from 'http'
-import { DeepReadonly } from 'ts-essentials'
+import etag from 'etag'
+import vary from 'vary'
+import fresh from 'fresh'
 import { parse } from 'url'
-import * as etag from 'etag'
-import * as onFinished from 'on-finished'
-import * as destroy from 'destroy'
-import { createReadStream, stat, Stats } from 'fs'
+import mime from 'mime-types'
+import destroy from 'destroy'
 import { extname } from 'path'
-import * as mime from 'mime-types'
-import * as contentDisposition from 'content-disposition'
-import * as vary from 'vary'
-import * as fresh from 'fresh'
+import onFinished from 'on-finished'
 import { Macroable } from 'macroable'
+import { DeepReadonly } from 'ts-essentials'
+import { createReadStream, stat, Stats } from 'fs'
+import contentDisposition from 'content-disposition'
+import { ServerResponse, IncomingMessage } from 'http'
 import { serialize, CookieOptions } from '@poppinss/cookie'
 
 import {
@@ -226,7 +226,7 @@ export class Response extends Macroable implements ResponseContract {
   /**
    * Stream the body to the response and handles cleaning up the stream
    */
-  private _streamBody (body: ResponseStream, errorCallback?: ((error) => any)) {
+  private _streamBody (body: ResponseStream, errorCallback?: ((error: NodeJS.ErrnoException) => any)) {
     return new Promise((resolve) => {
       let finished = false
 
@@ -281,7 +281,7 @@ export class Response extends Macroable implements ResponseContract {
   private async _download (
     filePath: string,
     generateEtag: boolean,
-    errorCallback?: ((error) => any),
+    errorCallback?: ((error: NodeJS.ErrnoException) => any),
   ) {
     try {
       const stats = await statFn(filePath)

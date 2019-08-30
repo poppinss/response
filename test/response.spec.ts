@@ -7,17 +7,17 @@
 * file that was distributed with this source code.
 */
 
-import * as test from 'japa'
-import * as supertest from 'supertest'
+import test from 'japa'
+import etag from 'etag'
 import { join } from 'path'
+import supertest from 'supertest'
+import { createServer } from 'http'
+import { parse } from '@poppinss/cookie'
 import { Filesystem } from '@poppinss/dev-utils'
 import { createWriteStream, createReadStream } from 'fs'
-import { createServer } from 'http'
-import * as etag from 'etag'
-import { parse } from '@poppinss/cookie'
 
-import { ResponseConfigContract } from '../src/contracts'
 import { Response } from '../src/Response'
+import { ResponseConfigContract } from '../src/contracts'
 
 const SECRET = Math.random().toFixed(36).substring(2, 38)
 
@@ -88,8 +88,8 @@ test.group('Response', (group) => {
       res.end()
     })
 
-    const { headers } = await supertest(server).get('/')
-    assert.deepEqual(headers['set-cookie'], ['username=virk', 'age=22'])
+    const { header } = await supertest(server).get('/')
+    assert.deepEqual(header['set-cookie'], ['username=virk', 'age=22'])
   })
 
   test('add header via append when header doesn\'t exists already', async (assert) => {
@@ -102,8 +102,8 @@ test.group('Response', (group) => {
       res.end()
     })
 
-    const { headers } = await supertest(server).get('/')
-    assert.deepEqual(headers['set-cookie'], ['age=22'])
+    const { header } = await supertest(server).get('/')
+    assert.deepEqual(header['set-cookie'], ['age=22'])
   })
 
   test('append to the header value when it\'s an array', async (assert) => {
@@ -117,8 +117,8 @@ test.group('Response', (group) => {
       res.end()
     })
 
-    const { headers } = await supertest(server).get('/')
-    assert.deepEqual(headers['set-cookie'], ['username=virk', 'age=22'])
+    const { header } = await supertest(server).get('/')
+    assert.deepEqual(header['set-cookie'], ['username=virk', 'age=22'])
   })
 
   test('do not set header when value is non-existy', async (assert) => {
@@ -131,8 +131,8 @@ test.group('Response', (group) => {
       res.end()
     })
 
-    const { headers } = await supertest(server).get('/')
-    assert.isUndefined(headers['set-cookie'])
+    const { header } = await supertest(server).get('/')
+    assert.isUndefined(header['set-cookie'])
   })
 
   test('do not set header when already exists', async () => {
@@ -160,8 +160,8 @@ test.group('Response', (group) => {
       res.end()
     })
 
-    const { headers } = await supertest(server).get('/')
-    assert.notProperty(headers, 'content-type')
+    const { header } = await supertest(server).get('/')
+    assert.notProperty(header, 'content-type')
   })
 
   test('set HTTP status', async () => {
@@ -667,8 +667,8 @@ test.group('Response', (group) => {
       response.finish()
     })
 
-    const { headers } = await supertest(server).get('/').redirects(1)
-    assert.equal(headers.location, '/foo')
+    const { header } = await supertest(server).get('/').redirects(1)
+    assert.equal(header.location, '/foo')
   })
 
   test('redirect to given url with query string', async (assert) => {
@@ -679,8 +679,8 @@ test.group('Response', (group) => {
       response.finish()
     })
 
-    const { headers } = await supertest(server).get('/?username=virk').redirects(1)
-    assert.equal(headers.location, '/foo?username=virk')
+    const { header } = await supertest(server).get('/?username=virk').redirects(1)
+    assert.equal(header.location, '/foo?username=virk')
   })
 
   test('redirect to given url and set custom statusCode', async () => {
@@ -738,8 +738,8 @@ test.group('Response', (group) => {
       response.finish()
     })
 
-    const { headers } = await supertest(server).get('/').expect(204)
-    assert.isUndefined(headers['content-type'])
+    const { header } = await supertest(server).get('/').expect(204)
+    assert.isUndefined(header['content-type'])
   })
 
   test('generate etag when set to true', async () => {
@@ -878,8 +878,8 @@ test.group('Response', (group) => {
       response.finish()
     })
 
-    const { headers } = await supertest(server).get('/').expect(200)
-    const cookies = headers['set-cookie'].map((cookie: string) => {
+    const { header } = await supertest(server).get('/').expect(200)
+    const cookies = header['set-cookie'].map((cookie: string) => {
       const [value, ...options] = cookie.split(';')
       return { value: parse(value, SECRET), options: options.map((option) => option.trim()) }
     })
@@ -903,8 +903,8 @@ test.group('Response', (group) => {
       response.finish()
     })
 
-    const { headers } = await supertest(server).get('/').expect(200)
-    const cookies = headers['set-cookie'].map((cookie: string) => {
+    const { header } = await supertest(server).get('/').expect(200)
+    const cookies = header['set-cookie'].map((cookie: string) => {
       const [value, ...options] = cookie.split(';')
       return { value: parse(value, SECRET), options: options.map((option) => option.trim()) }
     })
@@ -928,8 +928,8 @@ test.group('Response', (group) => {
       response.finish()
     })
 
-    const { headers } = await supertest(server).get('/').expect(200)
-    const cookies = headers['set-cookie'].map((cookie: string) => {
+    const { header } = await supertest(server).get('/').expect(200)
+    const cookies = header['set-cookie'].map((cookie: string) => {
       const [value, ...options] = cookie.split(';')
       return { value: parse(value, SECRET), options: options.map((option) => option.trim()) }
     })
@@ -953,8 +953,8 @@ test.group('Response', (group) => {
       response.finish()
     })
 
-    const { headers } = await supertest(server).get('/').expect(200)
-    const cookies = headers['set-cookie'].map((cookie: string) => {
+    const { header } = await supertest(server).get('/').expect(200)
+    const cookies = header['set-cookie'].map((cookie: string) => {
       const [value, ...options] = cookie.split(';')
       return { value: parse(value, SECRET), options: options.map((option) => option.trim()) }
     })
